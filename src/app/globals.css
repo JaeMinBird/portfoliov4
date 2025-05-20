@@ -1,7 +1,16 @@
 @import "tailwindcss";
 
+:root {
+  --black-han-sans: var(--font-black-han-sans);
+  --fredoka: var(--font-fredoka);
+}
+
 body {
   background: #ffffff;
   color: #171717;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--fredoka), sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--black-han-sans), sans-serif;
 }
