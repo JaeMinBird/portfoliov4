@@ -102,46 +102,44 @@ export default function StickyHeader() {
               />
             </div>
           </motion.button>
-          
-          {/* Navigation Links */}
+            {/* Navigation Links */}
           <nav className="hidden md:flex items-center space-x-8">
-            {/* Features Link with slide effect */}
-            <div className="h-8 overflow-hidden">
+            {/* Features Link with slide effect - exact height of text */}            <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
               <motion.a 
                 href="#features" 
-                className="text-xl font-medium text-black font-fredoka flex flex-col"
+                className="text-xl font-medium font-fredoka flex flex-col leading-none"
                 onClick={(e) => scrollToSection('features', e)}
-                whileHover={{ y: -30 }}
-                transition={{ duration: 0.3 }}
+                whileHover={{ y: '-1.25rem' }}
+                transition={{ duration: 0.2 }}
               >
-                <span>FEATURES</span>
+                <span className="text-black">FEATURES</span>
                 <span className="text-[#C1121F]">FEATURES</span>
               </motion.a>
             </div>
             
-            {/* FAQ Link with slide effect */}
-            <div className="h-8 overflow-hidden">
+            {/* FAQ Link with slide effect - exact height of text */}
+            <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
               <motion.a 
                 href="#faq" 
-                className="text-xl font-medium text-black font-fredoka flex flex-col"
+                className="text-xl font-medium font-fredoka flex flex-col leading-none"
                 onClick={(e) => scrollToSection('faq', e)}
-                whileHover={{ y: -30 }}
-                transition={{ duration: 0.3 }}
+                whileHover={{ y: '-1.25rem' }}
+                transition={{ duration: 0.2 }}
               >
-                <span>FAQ</span>
+                <span className="text-black">FAQ</span>
                 <span className="text-[#C1121F]">FAQ</span>
               </motion.a>
             </div>
             
-            {/* BLOG Link with slide effect */}
-            <div className="h-8 overflow-hidden">
+            {/* BLOG Link with slide effect - exact height of text */}
+            <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
               <motion.a 
                 href="/blog" 
-                className="text-xl font-medium text-black font-fredoka flex flex-col"
-                whileHover={{ y: -30 }}
-                transition={{ duration: 0.3 }}
+                className="text-xl font-medium font-fredoka flex flex-col leading-none"
+                whileHover={{ y: '-1.25rem' }}
+                transition={{ duration: 0.2 }}
               >
-                <span>BLOG</span>
+                <span className="text-black">BLOG</span>
                 <span className="text-[#C1121F]">BLOG</span>
               </motion.a>
             </div>
@@ -149,8 +147,7 @@ export default function StickyHeader() {
         </div>
       </motion.div>
 
-      {/* Mobile Navigation Overlay */}
-      <AnimatePresence>
+      {/* Mobile Navigation Overlay */}      <AnimatePresence>
         {mobileNavOpen && (
           <motion.div
             className="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center"
@@ -162,7 +159,7 @@ export default function StickyHeader() {
             <nav className="flex flex-col items-center space-y-8">
               <motion.a
                 href="#features"
-                className="text-4xl font-bold text-[#C1121F]"
+                className="text-4xl font-bold text-black font-fredoka"
                 onClick={(e) => scrollToSection('features', e)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -172,7 +169,7 @@ export default function StickyHeader() {
               </motion.a>
               <motion.a
                 href="#faq"
-                className="text-4xl font-bold text-[#C1121F]"
+                className="text-4xl font-bold text-black font-fredoka"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -182,7 +179,7 @@ export default function StickyHeader() {
               </motion.a>
               <motion.a
                 href="/blog"
-                className="text-4xl font-bold text-[#C1121F]"
+                className="text-4xl font-bold text-black font-fredoka"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
