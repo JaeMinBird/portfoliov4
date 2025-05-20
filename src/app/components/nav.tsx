@@ -1,10 +1,114 @@
 "use client";
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence, SVGMotionProps } from "framer-motion";
+import Image from "next/image";
+
+// Separate the MenuButton component from SVGMotionProps to avoid type conflicts
+interface MenuButtonProps {
+  isOpen?: boolean;
+  color?: string;
+  strokeWidth?: string | number;
+  transition?: any; // Use any for transition to avoid TypeScript errors
+  lineProps?: any;
+  width?: string | number;
+  height?: string | number;
+  onClick?: () => void;
+  className?: string;
+}
+
+const MenuButton = ({
+  isOpen = false,
+  width = 24,
+  height = 24,
+  strokeWidth = 1,
+  color = "#000",
+  transition = null,
+  lineProps = null,
+  ...props
+}: MenuButtonProps) => {
+  const variant = isOpen ? "opened" : "closed";
+  const top = {
+    closed: {
+      rotate: 0,
+      translateY: 0
+    },
+    opened: {
+      rotate: 45,
+      translateY: 2
+    }
+  };
+  const center = {
+    closed: {
+      opacity: 1
+    },
+    opened: {
+      opacity: 0
+    }
+  };
+  const bottom = {
+    closed: {
+      rotate: 0,
+      translateY: 0
+    },
+    opened: {
+      rotate: -45,
+      translateY: -2
+    }
+  };
+  lineProps = {
+    stroke: color,
+    strokeWidth: strokeWidth as number,
+    vectorEffect: "non-scaling-stroke",
+    initial: "closed",
+    animate: variant,
+    transition,
+    ...lineProps
+  };
+  const unitHeight = 4;
+  const unitWidth = (unitHeight * (width as number)) / (height as number);
+
+  return (
+    <motion.svg
+      viewBox={`0 0 ${unitWidth} ${unitHeight}`}
+      overflow="visible"
+      preserveAspectRatio="none"
+      width={width}
+      height={height}
+      {...props}
+    >
+      <motion.line
+        x1="0"
+        x2={unitWidth}
+        y1="0"
+        y2="0"
+        variants={top}
+        {...lineProps}
+      />
+      <motion.line
+        x1="0"
+        x2={unitWidth}
+        y1="2"
+        y2="2"
+        variants={center}
+        {...lineProps}
+      />
+      <motion.line
+        x1="0"
+        x2={unitWidth}
+        y1="4"
+        y2="4"
+        variants={bottom}
+        {...lineProps}
+      />
+    </motion.svg>
+  );
+};
 
 export default function StickyHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const previousIsMobileRef = useRef(false);
   
   // Check if page is scrolled to control header appearance
   useEffect(() => {
@@ -20,6 +124,27 @@ export default function StickyHeader() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  // Handle mobile detection and menu state
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobileView = window.innerWidth < 768;
+      
+      // If switching from mobile to desktop and menu is open, close it
+      if (!isMobileView && previousIsMobileRef.current && mobileNavOpen) {
+        setMobileNavOpen(false);
+      }
+      
+      previousIsMobileRef.current = isMobileView;
+      setIsMobile(isMobileView);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, [mobileNavOpen]);
 
   // Lock body scroll when mobile nav is open
   useEffect(() => {
@@ -58,99 +183,113 @@ export default function StickyHeader() {
       });
     }
   };
+  
   return (
-    <>
+    <header className="fixed top-0 inset-x-0 z-50 h-20 flex items-center font-fredoka" style={{ fontFamily: 'var(--font-fredoka)' }}>
+      {/* Logo positioned on the left side of the screen */}
       <motion.div 
-        className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 px-5 py-2 rounded-full backdrop-blur-sm bg-white/50 transition-all duration-300 ${
-          scrolled ? 'border border-[#C1121F]' : 'border border-transparent'
-        }`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
+        className="absolute left-6 md:left-12 z-[70]" // Increased left padding on desktop
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="flex items-center justify-center">
-          {/* Mobile Navigation Button */}
-          <motion.button
-            className="md:hidden ml-auto w-10 h-10 flex justify-center items-center z-50"
-            onClick={() => setMobileNavOpen(!mobileNavOpen)}
-            aria-label="Toggle mobile menu"
-            initial={false}
-          >
-            <div className="w-7 h-7 flex items-center justify-center relative">
-              <motion.span 
-                className="block absolute w-full h-0.5 bg-[#C1121F]"
-                animate={{
-                  rotate: mobileNavOpen ? 45 : 0,
-                  y: mobileNavOpen ? 0 : -8
-                }}
-                transition={{ duration: 0.4 }}
-              />
-              <motion.span 
-                className="block absolute w-full h-0.5 bg-[#C1121F]"
-                animate={{
-                  opacity: mobileNavOpen ? 0 : 1
-                }}
-                transition={{ duration: 0.2 }}
-              />
-              <motion.span 
-                className="block absolute w-full h-0.5 bg-[#C1121F]"
-                animate={{
-                  rotate: mobileNavOpen ? -45 : 0,
-                  y: mobileNavOpen ? 0 : 8
-                }}
-                transition={{ duration: 0.4 }}
-              />
-            </div>
-          </motion.button>
-            {/* Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {/* Features Link with slide effect - exact height of text */}            <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
-              <motion.a 
-                href="#features" 
-                className="text-xl font-medium font-fredoka flex flex-col leading-none"
-                onClick={(e) => scrollToSection('features', e)}
-                whileHover={{ y: '-1.25rem' }}
-                transition={{ duration: 0.2 }}
-              >
-                <span className="text-black">FEATURES</span>
-                <span className="text-[#C1121F]">FEATURES</span>
-              </motion.a>
-            </div>
-            
-            {/* FAQ Link with slide effect - exact height of text */}
-            <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
-              <motion.a 
-                href="#faq" 
-                className="text-xl font-medium font-fredoka flex flex-col leading-none"
-                onClick={(e) => scrollToSection('faq', e)}
-                whileHover={{ y: '-1.25rem' }}
-                transition={{ duration: 0.2 }}
-              >
-                <span className="text-black">FAQ</span>
-                <span className="text-[#C1121F]">FAQ</span>
-              </motion.a>
-            </div>
-            
-            {/* BLOG Link with slide effect - exact height of text */}
-            <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
-              <motion.a 
-                href="/blog" 
-                className="text-xl font-medium font-fredoka flex flex-col leading-none"
-                whileHover={{ y: '-1.25rem' }}
-                transition={{ duration: 0.2 }}
-              >
-                <span className="text-black">BLOG</span>
-                <span className="text-[#C1121F]">BLOG</span>
-              </motion.a>
-            </div>
-          </nav>
-        </div>
+        <motion.div
+          className={`${isMobile ? 'w-[29px] h-[29px]' : 'w-[29px] h-[29px]'} cursor-pointer`} // All logos 29px (30% larger)
+          whileHover={!isMobile ? { rotate: 219 } : undefined}
+          animate={mobileNavOpen ? { rotate: 219 } : { rotate: 0 }}
+          transition={{ duration: 0.5 }}
+          onClick={() => {
+            if (window.location.pathname !== '/') {
+              window.location.href = '/';
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+        >
+          <Image 
+            src="/logo.svg" 
+            alt="Logo" 
+            width={29} 
+            height={29}
+          />
+        </motion.div>
       </motion.div>
-
-      {/* Mobile Navigation Overlay */}      <AnimatePresence>
+      
+      {/* Desktop Navigation Container */}
+      <motion.div 
+        className={`absolute hidden md:block md:left-1/2 md:transform md:-translate-x-1/2 px-4 py-2 rounded-full backdrop-blur-sm bg-white/50 transition-all duration-300 ${
+          scrolled ? 'border border-[#C1121F]' : 'border border-transparent'
+        }`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <nav className="flex items-center space-x-8">
+          {/* Features Link with slide effect - exact height of text */}
+          <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
+            <motion.a 
+              href="#features" 
+              className="text-xl font-medium flex flex-col leading-none"
+              style={{ fontFamily: 'var(--font-fredoka)' }}
+              onClick={(e) => scrollToSection('features', e)}
+              whileHover={{ y: '-1.25rem' }}
+              transition={{ duration: 0.2 }}
+            >
+              <span className="text-black">FEATURES</span>
+              <span className="text-[#C1121F]">FEATURES</span>
+            </motion.a>
+          </div>
+          
+          {/* FAQ Link with slide effect - exact height of text */}
+          <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
+            <motion.a 
+              href="#faq" 
+              className="text-xl font-medium flex flex-col leading-none"
+              style={{ fontFamily: 'var(--font-fredoka)' }}
+              onClick={(e) => scrollToSection('faq', e)}
+              whileHover={{ y: '-1.25rem' }}
+              transition={{ duration: 0.2 }}
+            >
+              <span className="text-black">FAQ</span>
+              <span className="text-[#C1121F]">FAQ</span>
+            </motion.a>
+          </div>
+          
+          {/* BLOG Link with slide effect - exact height of text */}
+          <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
+            <motion.a 
+              href="/blog" 
+              className="text-xl font-medium flex flex-col leading-none"
+              style={{ fontFamily: 'var(--font-fredoka)' }}
+              whileHover={{ y: '-1.25rem' }}
+              transition={{ duration: 0.2 }}
+            >
+              <span className="text-black">BLOG</span>
+              <span className="text-[#C1121F]">BLOG</span>
+            </motion.a>
+          </div>
+        </nav>
+      </motion.div>
+      
+      {/* Red MenuButton hamburger - Replace the old button */}
+      <div className="absolute right-6 md:hidden z-[70] cursor-pointer">
+        <MenuButton
+          isOpen={mobileNavOpen}
+          onClick={() => setMobileNavOpen(!mobileNavOpen)}
+          strokeWidth="6"
+          color="#C1121F"
+          lineProps={{ strokeLinecap: "round" }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
+          width="24"
+          height="24"
+        />
+      </div>
+      
+      {/* Mobile Navigation Overlay */}
+      <AnimatePresence>
         {mobileNavOpen && (
           <motion.div
-            className="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
@@ -159,7 +298,8 @@ export default function StickyHeader() {
             <nav className="flex flex-col items-center space-y-8">
               <motion.a
                 href="#features"
-                className="text-4xl font-bold text-black font-fredoka"
+                className="text-4xl font-bold text-black"
+                style={{ fontFamily: 'var(--font-fredoka)' }}
                 onClick={(e) => scrollToSection('features', e)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -169,7 +309,8 @@ export default function StickyHeader() {
               </motion.a>
               <motion.a
                 href="#faq"
-                className="text-4xl font-bold text-black font-fredoka"
+                className="text-4xl font-bold text-black"
+                style={{ fontFamily: 'var(--font-fredoka)' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -179,7 +320,8 @@ export default function StickyHeader() {
               </motion.a>
               <motion.a
                 href="/blog"
-                className="text-4xl font-bold text-black font-fredoka"
+                className="text-4xl font-bold text-black"
+                style={{ fontFamily: 'var(--font-fredoka)' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -191,6 +333,6 @@ export default function StickyHeader() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </header>
   );
 }
