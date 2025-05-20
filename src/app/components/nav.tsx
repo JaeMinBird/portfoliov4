@@ -58,7 +58,6 @@ export default function StickyHeader() {
       });
     }
   };
-
   return (
     <>
       <motion.div 
@@ -106,23 +105,46 @@ export default function StickyHeader() {
           
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a 
-              href="#features" 
-              className="text-xl font-medium text-gray-700 font-fredoka"
-              onClick={(e) => scrollToSection('features', e)}
-            >
-              FEATURES
-            </a>
-            <a 
-              href="#faq" 
-              className="text-xl font-medium text-gray-700 font-fredoka"
-              onClick={(e) => scrollToSection('faq', e)}
-            >
-              FAQ
-            </a>
-            <a href="/blog" className="text-xl font-medium text-gray-700 font-fredoka">
-              BLOG
-            </a>
+            {/* Features Link with slide effect */}
+            <div className="h-8 overflow-hidden">
+              <motion.a 
+                href="#features" 
+                className="text-xl font-medium text-black font-fredoka flex flex-col"
+                onClick={(e) => scrollToSection('features', e)}
+                whileHover={{ y: -30 }}
+                transition={{ duration: 0.3 }}
+              >
+                <span>FEATURES</span>
+                <span className="text-[#C1121F]">FEATURES</span>
+              </motion.a>
+            </div>
+            
+            {/* FAQ Link with slide effect */}
+            <div className="h-8 overflow-hidden">
+              <motion.a 
+                href="#faq" 
+                className="text-xl font-medium text-black font-fredoka flex flex-col"
+                onClick={(e) => scrollToSection('faq', e)}
+                whileHover={{ y: -30 }}
+                transition={{ duration: 0.3 }}
+              >
+                <span>FAQ</span>
+                <span className="text-[#C1121F]">FAQ</span>
+              </motion.a>
+            </div>
+            
+            {/* BLOG Link with slide effect */}
+            <div className="h-8 overflow-hidden">
+              <motion.a 
+                href="/blog" 
+                className="text-xl font-medium text-black font-fredoka flex flex-col"
+                whileHover={{ y: -30 }}
+                transition={{ duration: 0.3 }}
+              >
+                <span>BLOG</span>
+                <span className="text-[#C1121F]">BLOG</span>
+              </motion.a>
+            </div>
           </nav>
         </div>
       </motion.div>
