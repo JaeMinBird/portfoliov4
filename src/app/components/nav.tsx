@@ -218,7 +218,7 @@ export default function StickyHeader() {
       {/* Desktop Navigation Container */}
       <motion.div 
         className={`absolute hidden md:block md:left-1/2 md:transform md:-translate-x-1/2 px-4 py-2 rounded-full backdrop-blur-sm bg-white/50 transition-all duration-300 ${
-          scrolled ? 'border border-[#C1121F]' : 'border border-transparent'
+          scrolled ? 'border border-[#ff9945]' : 'border border-transparent'
         }`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -236,7 +236,7 @@ export default function StickyHeader() {
               transition={{ duration: 0.2 }}
             >
               <span className="text-black">FEATURES</span>
-              <span className="text-[#C1121F]">FEATURES</span>
+              <span className="text-[#ff9945]">FEATURES</span>
             </motion.a>
           </div>
           
@@ -251,7 +251,7 @@ export default function StickyHeader() {
               transition={{ duration: 0.2 }}
             >
               <span className="text-black">FAQ</span>
-              <span className="text-[#C1121F]">FAQ</span>
+              <span className="text-[#ff9945]">FAQ</span>
             </motion.a>
           </div>
           
@@ -265,7 +265,7 @@ export default function StickyHeader() {
               transition={{ duration: 0.2 }}
             >
               <span className="text-black">BLOG</span>
-              <span className="text-[#C1121F]">BLOG</span>
+              <span className="text-[#ff9945]">BLOG</span>
             </motion.a>
           </div>
         </nav>
@@ -277,7 +277,7 @@ export default function StickyHeader() {
           isOpen={mobileNavOpen}
           onClick={() => setMobileNavOpen(!mobileNavOpen)}
           strokeWidth="6"
-          color="#C1121F"
+          color="#ff9945"
           lineProps={{ strokeLinecap: "round" }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
           width="24"
@@ -289,7 +289,7 @@ export default function StickyHeader() {
       <AnimatePresence>
         {mobileNavOpen && (
           <motion.div
-            className="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center pt-[10vh]"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
@@ -330,6 +330,27 @@ export default function StickyHeader() {
                 BLOG
               </motion.a>
             </nav>
+            
+            {/* Footer section for mobile menu similar to screenshot */}
+            <motion.div 
+              className="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-8 text-center text-sm text-gray-700"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              <p className="mb-3">Follow</p>
+              <div className="flex space-x-4 mb-4">
+                <a href="https://linkedin.com" className="hover:text-[#ff9945]">LinkedIn</a>
+                <a href="https://instagram.com" className="hover:text-[#ff9945]">Instagram</a>
+              </div>
+              
+              <div className="mb-4">
+                <p className="mb-1">General Enquiries</p>
+                <a href="mailto:hello@toyfight.co" className="hover:text-[#ff9945]">hello@toyfight.co</a>
+              </div>
+              
+              <p className="text-xs">© 2025 ToyFight® All Rights Reserved</p>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
