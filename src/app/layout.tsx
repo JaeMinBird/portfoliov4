@@ -4,13 +4,13 @@ import "./globals.css";
 
 const blackHanSans = Black_Han_Sans({
   weight: "400", // Black Han Sans only comes in weight 400
-  variable: "--font-black-han-sans",
   subsets: ["latin"],
+  variable: "--font-black-han-sans",
 });
 
 const fredoka = Fredoka({
-  variable: "--font-fredoka",
   subsets: ["latin"],
+  variable: "--font-fredoka",
 });
 
 export const metadata: Metadata = {
@@ -22,11 +22,10 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {  return (
-    <html lang="en">
-      <body
-        className={`${blackHanSans.variable} ${fredoka.variable} antialiased`}
-      >
+}>) {
+  return (
+    <html lang="en" className={`${blackHanSans.variable} ${fredoka.variable}`}>
+      <body className="antialiased font-fredoka">
         {children}
       </body>
     </html>
