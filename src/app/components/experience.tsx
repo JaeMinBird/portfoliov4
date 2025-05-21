@@ -67,18 +67,14 @@ export default function Experience({
       </div>
 
       {/* Mobile-only WHEN/WHERE section that appears between quote and divider */}
-      <div className="flex flex-col gap-4 mt-6 mb-8 md:hidden">
-        <div className="flex items-center">
-          <span className="bg-[#333] text-white px-4 py-1 rounded-full text-sm font-fredoka">WHEN</span>
-          <div className="flex-grow text-center">
-            <span className="text-sm text-[#333] font-fredoka">{when}</span>
-          </div>
+      <div className="grid grid-cols-2 gap-4 mt-6 mb-8 md:hidden">
+        <div className="flex flex-col gap-4">
+          <span className="bg-[#333] text-white px-4 py-1 rounded-full text-sm font-fredoka inline-block w-fit">WHEN</span>
+          <span className="bg-[#333] text-white px-4 py-1 rounded-full text-sm font-fredoka inline-block w-fit">WHERE</span>
         </div>
-        <div className="flex items-center">
-          <span className="bg-[#333] text-white px-4 py-1 rounded-full text-sm font-fredoka">WHERE</span>
-          <div className="flex-grow text-center">
-            <span className="text-sm text-[#333] font-fredoka">{where}</span>
-          </div>
+        <div className="flex flex-col gap-4">
+          <span className="text-sm py-1 text-[#333] font-fredoka">{when}</span>
+          <span className="text-sm py-1 text-[#333] font-fredoka">{where}</span>
         </div>
       </div>
 
@@ -105,18 +101,16 @@ export default function Experience({
         <div></div>
 
         {/* Third third - attribution section aligns with quote column (desktop only) */}
-        <div className="hidden md:flex flex-col gap-4">
-          <div className="flex items-center">
-            <span className="bg-[#333] text-white px-5 py-1.5 rounded-full text-base font-fredoka">WHEN</span>
-            <div className="flex-grow text-center">
-              <span className="text-base md:text-lg text-[#333] font-fredoka">{when}</span>
-            </div>
+        <div className="hidden md:grid md:grid-cols-2 gap-4 items-start">
+          {/* First column - WHEN/WHERE labels */}
+          <div className="flex flex-col gap-4">
+            <span className="bg-[#333] text-white px-5 py-1.5 rounded-full text-base font-fredoka inline-block w-fit">WHEN</span>
+            <span className="bg-[#333] text-white px-5 py-1.5 rounded-full text-base font-fredoka inline-block w-fit">WHERE</span>
           </div>
-          <div className="flex items-center">
-            <span className="bg-[#333] text-white px-5 py-1.5 rounded-full text-base font-fredoka">WHERE</span>
-            <div className="flex-grow text-center">
-              <span className="text-base md:text-lg text-[#333] font-fredoka">{where}</span>
-            </div>
+          {/* Second column - WHEN/WHERE values */}
+          <div className="flex flex-col gap-4">
+            <span className="text-base md:text-lg px-5 py-1 text-[#333] font-fredoka">{when}</span>
+            <span className="text-base md:text-lg px-5 py-1 text-[#333] font-fredoka">{where}</span>
           </div>
         </div>
       </div>
