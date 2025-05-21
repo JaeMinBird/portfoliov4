@@ -29,7 +29,7 @@ export default function Experience({
 }: ExperienceProps) {
   return (
     <motion.div 
-      className="rounded-2xl bg-[#f9f3e9] p-6 md:p-12"
+      className="rounded-2xl bg-white border-2 border-black p-6 md:p-12"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -82,8 +82,8 @@ export default function Experience({
         </div>
       </div>
 
-      {/* Divider line */}
-      <hr className="my-8 border-[#e0d5c6]" />
+      {/* Divider line - now black and thicker */}
+      <hr className="my-8 border-black border-[1.5px]" />
 
       {/* Bottom section - maintain the same three-column grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
