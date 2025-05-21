@@ -50,17 +50,17 @@ export default function Experience({
 
         {/* Second third - company and role side by side (on both mobile and desktop) */}
         <div className="flex flex-row gap-4 justify-center">
-          <div className="text-[#ff5722] text-xl md:text-lg lg:text-lg xl:text-3xl font-normal p-2 md:p-2 lg:p-4 xl:p-4 w-1/2 font-fredoka">
+          <div className="text-[#ff5722] text-xl md:text-lg lg:text-xl xl:text-3xl font-normal p-2 md:p-2 lg:p-4 xl:p-4 w-1/2 font-fredoka">
             {company}
           </div>
-          <div className="text-[#ff5722] text-xl md:text-lg lg:text-lg xl:text-3xl font-normal p-2 md:p-2 lg:p-4 xl:p-4 w-1/2 font-fredoka">
+          <div className="text-[#ff5722] text-xl md:text-lg lg:text-xl xl:text-3xl font-normal p-2 md:p-2 lg:p-4 xl:p-4 w-1/2 font-fredoka">
             {role}
           </div>
         </div>
 
         {/* Third third - quote */}
         <div>
-          <blockquote className="text-xl md:text-base lg:text-base xl:text-3xl font-normal leading-tight md:leading-snug lg:leading-snug xl:leading-tight font-fredoka">
+          <blockquote className="text-xl md:text-base lg:text-lg xl:text-3xl font-normal leading-tight md:leading-snug lg:leading-snug xl:leading-tight font-fredoka">
             "{quote}"
           </blockquote>
         </div>
@@ -89,7 +89,7 @@ export default function Experience({
             {tags.map((tag, index) => (
               <span 
                 key={index} 
-                className="px-4 py-1 md:px-3 md:py-0.5 lg:px-3 lg:py-0.5 xl:px-5 xl:py-1.5 rounded-full border border-[#333] text-[#333] text-sm md:text-xs lg:text-xs xl:text-base font-fredoka inline-flex items-center h-fit my-1"
+                className="px-4 py-1 md:px-3 md:py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full border border-[#333] text-[#333] text-sm md:text-xs lg:text-sm xl:text-base font-fredoka inline-flex items-center h-fit my-1"
               >
                 {tag.label}
               </span>
@@ -105,16 +105,16 @@ export default function Experience({
           {/* Row 1 */}
           <div className="flex gap-2 lg:gap-2 xl:gap-4">
             <div className="w-1/2 py-0.5">
-              <span className="bg-[#333] text-xs lg:text-xs xl:text-base text-white px-3 py-0.5 lg:px-3 lg:py-0.5 xl:px-5 xl:py-1.5 rounded-full font-fredoka inline-flex items-center h-fit my-1">WHEN</span>
+              <span className="bg-[#333] text-xs lg:text-sm xl:text-base text-white px-3 py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full font-fredoka inline-flex items-center h-fit my-1">WHEN</span>
             </div>
-            <span className="text-xs lg:text-xs xl:text-base py-1 lg:py-1 xl:py-3 text-[#333] font-fredoka w-1/2">{when}</span>
+            <span className="text-xs lg:text-sm xl:text-base py-1 lg:py-2 xl:py-3 text-[#333] font-fredoka w-1/2">{when}</span>
           </div>
           {/* Row 2 */}
           <div className="flex gap-2 lg:gap-2 xl:gap-4">
             <div className="w-1/2 py-0.5">
-              <span className="bg-[#333] text-xs lg:text-xs xl:text-base text-white px-3 py-0.5 lg:px-3 lg:py-0.5 xl:px-5 xl:py-1.5 rounded-full font-fredoka inline-flex items-center h-fit my-1">WHERE</span>
+              <span className="bg-[#333] text-xs lg:text-sm xl:text-base text-white px-3 py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full font-fredoka inline-flex items-center h-fit my-1">WHERE</span>
             </div>
-            <span className="text-xs lg:text-xs xl:text-base py-1 lg:py-1 xl:py-3 text-[#333] font-fredoka w-1/2">{where}</span>
+            <span className="text-xs lg:text-sm xl:text-base py-1 lg:py-2 xl:py-3 text-[#333] font-fredoka w-1/2">{where}</span>
           </div>
         </div>
       </div>
