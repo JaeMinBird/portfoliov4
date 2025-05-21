@@ -289,13 +289,13 @@ export default function StickyHeader() {
       <AnimatePresence>
         {mobileNavOpen && (
           <motion.div
-            className="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center pt-[10vh]"
+            className="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-start"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3 }}
           >
-            <nav className="flex flex-col items-center space-y-8">
+            <nav className="flex flex-col items-center space-y-8 mt-60">
               <motion.a
                 href="#features"
                 className="text-4xl font-bold text-black"
