@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, SVGMotionProps } from "framer-motion";
 import Image from "next/image";
+import { IconBrandLinkedinFilled, IconBrandGithubFilled } from '@tabler/icons-react';
 
 // Separate the MenuButton component from SVGMotionProps to avoid type conflicts
 interface MenuButtonProps {
@@ -295,7 +296,7 @@ export default function StickyHeader() {
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3 }}
           >
-            <nav className="flex flex-col items-center space-y-8 mt-60">
+            <nav className="flex flex-col items-center space-y-8 py-65">
               <motion.a
                 href="#features"
                 className="text-4xl font-bold text-black"
@@ -338,14 +339,17 @@ export default function StickyHeader() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              <p className="mb-3">Follow</p>
-              <div className="flex space-x-4 mb-4">
-                <a href="https://linkedin.com" className="hover:text-[#ff9945]">LinkedIn</a>
-                <a href="https://instagram.com" className="hover:text-[#ff9945]">Instagram</a>
+              <p className="mb-3">Connect</p>
+              <div className="flex space-x-6 mb-4">
+                <a href="https://linkedin.com" className="hover:text-[#ff9945] transition-colors">
+                  <IconBrandLinkedinFilled size={24} />
+                </a>
+                <a href="https://github.com" className="hover:text-[#ff9945] transition-colors">
+                  <IconBrandGithubFilled size={24} />
+                </a>
               </div>
               
               <div className="mb-4">
-                <p className="mb-1">General Enquiries</p>
                 <a href="mailto:hello@toyfight.co" className="hover:text-[#ff9945]">hello@toyfight.co</a>
               </div>
               
