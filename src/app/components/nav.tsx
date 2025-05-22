@@ -291,9 +291,9 @@ export default function StickyHeader() {
         {mobileNavOpen && (
           <motion.div
             className="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-start"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
             <nav className="flex flex-col items-center space-y-8 py-65">
