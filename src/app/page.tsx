@@ -10,10 +10,10 @@ export default function Home() {
       <div className="container mx-auto py-20 px-4">
         <section className="mb-24">
           <div className="mt-10 md:mt-16">
-            <Header id={1} total={3} title="experience" color="#123456" />
+            <Header id={1} total={3} title="experience" color="#5a9bd5" />
           </div>
           <div className="mt-10 md:mt-16">
-            <ExperienceById id="peacock" color="#123456"/>
+            <ExperienceById id="peacock" color="#5a9bd5"/>
           </div>
         </section>
         
