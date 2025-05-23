@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 import Image from "next/image";
+import { getExperienceById, type ExperienceData } from "../data/experience";
 
 type Tag = {
   label: string;
@@ -16,6 +17,7 @@ type ExperienceProps = {
   when: string;
   where: string;
   tags: Tag[];
+  color?: string; // New color prop
 };
 
 export default function Experience({
@@ -26,6 +28,7 @@ export default function Experience({
   when,
   where,
   tags,
+  color = "#ff5722", // Default color
 }: ExperienceProps) {
   return (
     <motion.div 
@@ -50,10 +53,16 @@ export default function Experience({
 
         {/* Second third - company and role side by side (on both mobile and desktop) */}
         <div className="flex flex-row gap-4 justify-center">
-          <div className="text-[#ff5722] text-xl md:text-lg lg:text-xl xl:text-3xl font-normal p-2 md:p-2 lg:p-4 xl:p-4 w-1/2 font-fredoka">
+          <div 
+            className="text-xl md:text-lg lg:text-xl xl:text-3xl font-normal p-2 md:p-2 lg:p-4 xl:p-4 w-1/2 font-fredoka"
+            style={{ color }}
+          >
             {company}
           </div>
-          <div className="text-[#ff5722] text-xl md:text-lg lg:text-xl xl:text-3xl font-normal p-2 md:p-2 lg:p-4 xl:p-4 w-1/2 font-fredoka">
+          <div 
+            className="text-xl md:text-lg lg:text-xl xl:text-3xl font-normal p-2 md:p-2 lg:p-4 xl:p-4 w-1/2 font-fredoka"
+            style={{ color }}
+          >
             {role}
           </div>
         </div>
@@ -122,35 +131,24 @@ export default function Experience({
   );
 }
 
-// Example usage
-export function PeacockExperience() {
+// Or create a more generic component that takes an ID
+export function ExperienceById({ id, color }: { id: string; color?: string }) {
+  const experienceData = getExperienceById(id);
+  
+  if (!experienceData) {
+    return <div>Experience not found</div>;
+  }
+
   return (
     <Experience
-      logo={
-        <svg width="240" height="240" viewBox="0 0 200 200" fill="none">
-          <path d="M126 80L172 126" stroke="black" strokeWidth="10" />
-          <path d="M126 120L172 74" stroke="black" strokeWidth="10" />
-          <path d="M80 126L126 172" stroke="black" strokeWidth="10" />
-          <path d="M80 74L126 120" stroke="black" strokeWidth="10" />
-          <path d="M28 126L74 172" stroke="black" strokeWidth="10" />
-          <path d="M28 74L74 120" stroke="black" strokeWidth="10" />
-          <circle cx="126" cy="74" r="15" fill="#5956e9" />
-          <circle cx="172" cy="126" r="15" fill="#2ec5ce" />
-          <circle cx="172" cy="74" r="15" fill="#24ae88" />
-          <circle cx="74" cy="172" r="15" fill="#feb240" />
-          <circle cx="126" cy="172" r="15" fill="#fa3755" />
-          <circle cx="28" cy="126" r="15" fill="#ff8b43" />
-        </svg>
-      }
-      company="Peacock TV"
-      role="Design Partnership"
-      quote="Peacock has an incredible design team. Our partnership brings the best out of one other, and this relationship has shaped much about how RM thinks."
-      when="Jun - Aug 2024"
-      where="New York, New York"
-      tags={[
-        { label: "PRODUCT & UX" },
-        { label: "ENTERTAINMENT" },
-      ]}
+      logo={experienceData.logo}
+      company={experienceData.company}
+      role={experienceData.role}
+      quote={experienceData.quote}
+      when={experienceData.when}
+      where={experienceData.where}
+      tags={experienceData.tags}
+      color={color}
     />
   );
 }
