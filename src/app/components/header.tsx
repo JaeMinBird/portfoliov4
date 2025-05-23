@@ -9,7 +9,7 @@ interface HeaderProps {
   color?: string;
 }
 
-export default function Header({ id, total, title, color = '#000' }: HeaderProps) {
+export default function Header({ id, total, title, color = '#3B3B3B' }: HeaderProps) {
   const formattedId = String(id).padStart(2, '0');
   const formattedTotal = String(total).padStart(2, '0');
 

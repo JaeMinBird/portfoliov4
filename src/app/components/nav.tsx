@@ -22,11 +22,12 @@ const MenuButton = ({
   width = 24,
   height = 24,
   strokeWidth = 1,
-  color = "#000",
+  color = "#ff9945", // Changed from "#3B3B3B" to orange
   transition = null,
   lineProps = null,
   ...props
 }: MenuButtonProps) => {
+  // ...existing code...
   const variant = isOpen ? "opened" : "closed";
   const top = {
     closed: {
@@ -106,6 +107,7 @@ const MenuButton = ({
 };
 
 export default function StickyHeader() {
+  // ...existing code...
   const [scrolled, setScrolled] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -272,13 +274,13 @@ export default function StickyHeader() {
         </nav>
       </motion.div>
       
-      {/* Red MenuButton hamburger - Replace the old button */}
+      {/* MenuButton hamburger */}
       <div className="absolute right-6 md:hidden z-[70] cursor-pointer">
         <MenuButton
           isOpen={mobileNavOpen}
           onClick={() => setMobileNavOpen(!mobileNavOpen)}
           strokeWidth="6"
-          color="#ff9945"
+          color="#ff9945" // Changed from "#3B3B3B" to orange
           lineProps={{ strokeLinecap: "round" }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
           width="24"
