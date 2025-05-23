@@ -189,6 +189,18 @@ export default function StickyHeader() {
   
   return (
     <header className="fixed top-0 inset-x-0 z-50 h-20 flex items-center font-fredoka" style={{ fontFamily: 'var(--font-fredoka)' }}>
+      {/* Frosted glass background effect */}
+      <motion.div
+        className="absolute inset-0 backdrop-blur-md bg-gradient-to-b from-white/30 via-white/20 to-transparent pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: scrolled ? 1 : 0.7 }}
+        transition={{ duration: 0.3 }}
+        style={{
+          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%)'
+        }}
+      />
+      
       {/* Logo positioned on the left side of the screen */}
       <motion.div 
         className="absolute left-6 md:left-12 z-[70]" // Increased left padding on desktop
