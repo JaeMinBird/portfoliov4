@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 import Image from "next/image";
-import { getExperienceById, type ExperienceData } from "../data/experience";
+import { getExperienceById } from "../data/experience";
 
 type Tag = {
   label: string;
@@ -70,7 +70,7 @@ export default function Experience({
         {/* Third third - quote */}
         <div>
           <blockquote className="text-xl md:text-base lg:text-lg xl:text-3xl font-normal leading-tight md:leading-snug lg:leading-snug xl:leading-tight font-fredoka">
-            "{quote}"
+            &ldquo;{quote}&rdquo;
           </blockquote>
         </div>
       </div>

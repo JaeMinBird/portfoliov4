@@ -7,10 +7,9 @@ interface ProjectCardProps {
   description: string;
   company: string;
   year: string;
-  image: string;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, company, year, image }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, company, year }) => {
   const [isImageHovered, setIsImageHovered] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   
@@ -115,7 +114,6 @@ export default function Projects() {
           description={project.description}
           company={project.company}
           year={project.year}
-          image={project.image}
         />
       ))}
     </div>

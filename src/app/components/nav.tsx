@@ -1,16 +1,28 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence, SVGMotionProps } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { IconBrandLinkedinFilled, IconBrandGithubFilled } from '@tabler/icons-react';
+
+// Define proper types for line props
+interface LineProps {
+  stroke?: string;
+  strokeWidth?: number;
+  strokeLinecap?: "round" | "inherit" | "butt" | "square";
+  vectorEffect?: string;
+  initial?: string;
+  animate?: string;
+  transition?: object;
+  [key: string]: unknown; // Allow other properties
+}
 
 // Separate the MenuButton component from SVGMotionProps to avoid type conflicts
 interface MenuButtonProps {
   isOpen?: boolean;
   color?: string;
   strokeWidth?: string | number;
-  transition?: any; // Use any for transition to avoid TypeScript errors
-  lineProps?: any;
+  transition?: object | undefined;
+  lineProps?: LineProps;
   width?: string | number;
   height?: string | number;
   onClick?: () => void;
@@ -23,11 +35,10 @@ const MenuButton = ({
   height = 24,
   strokeWidth = 1,
   color = "#ff9945", // Changed from "#3B3B3B" to orange
-  transition = null,
-  lineProps = null,
+  transition = {},
+  lineProps = {},
   ...props
 }: MenuButtonProps) => {
-  // ...existing code...
   const variant = isOpen ? "opened" : "closed";
   const top = {
     closed: {
@@ -57,7 +68,8 @@ const MenuButton = ({
       translateY: -2
     }
   };
-  lineProps = {
+  
+  const combinedLineProps = {
     stroke: color,
     strokeWidth: strokeWidth as number,
     vectorEffect: "non-scaling-stroke",
@@ -66,6 +78,7 @@ const MenuButton = ({
     transition,
     ...lineProps
   };
+  
   const unitHeight = 4;
   const unitWidth = (unitHeight * (width as number)) / (height as number);
 
@@ -84,7 +97,7 @@ const MenuButton = ({
         y1="0"
         y2="0"
         variants={top}
-        {...lineProps}
+        {...combinedLineProps}
       />
       <motion.line
         x1="0"
@@ -92,7 +105,7 @@ const MenuButton = ({
         y1="2"
         y2="2"
         variants={center}
-        {...lineProps}
+        {...combinedLineProps}
       />
       <motion.line
         x1="0"
@@ -100,14 +113,13 @@ const MenuButton = ({
         y1="4"
         y2="4"
         variants={bottom}
-        {...lineProps}
+        {...combinedLineProps}
       />
     </motion.svg>
   );
 };
 
 export default function StickyHeader() {
-  // ...existing code...
   const [scrolled, setScrolled] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
