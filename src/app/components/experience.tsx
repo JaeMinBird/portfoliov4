@@ -82,8 +82,8 @@ export default function Experience({
           <span className="bg-[#3B3B3B] text-white px-4 py-1 rounded-full text-sm font-fredoka inline-block w-fit">WHERE</span> {/* Changed from bg-[#5a9bd5] */}
         </div>
         <div className="flex flex-col gap-4">
-          <span className="text-sm py-1 text-[#3B3B3B] font-fredoka">{when}</span> {/* Changed from text-[#5a9bd5] */}
-          <span className="text-sm py-1 text-[#3B3B3B] font-fredoka">{where}</span> {/* Changed from text-[#5a9bd5] */}
+          <span className="text-sm py-1 text-gray-600 font-fredoka">{when}</span>
+          <span className="text-sm py-1 text-gray-600 font-fredoka">{where}</span>
         </div>
       </div>
 
@@ -116,14 +116,14 @@ export default function Experience({
             <div className="w-1/2 py-0.5">
               <span className="bg-[#3B3B3B] text-xs lg:text-sm xl:text-base text-white px-3 py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full font-fredoka inline-flex items-center h-fit my-1">WHEN</span> {/* Changed from bg-[#5a9bd5] */}
             </div>
-            <span className="text-xs lg:text-sm xl:text-base py-1 lg:py-2 xl:py-3 text-[#3B3B3B] font-fredoka w-1/2">{when}</span> {/* Changed from text-[#5a9bd5] */}
+            <span className="text-xs lg:text-sm xl:text-base py-1 lg:py-2 xl:py-3 text-gray-600 font-fredoka w-1/2">{when}</span>
           </div>
           {/* Row 2 */}
           <div className="flex gap-2 lg:gap-2 xl:gap-4">
             <div className="w-1/2 py-0.5">
               <span className="bg-[#3B3B3B] text-xs lg:text-sm xl:text-base text-white px-3 py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full font-fredoka inline-flex items-center h-fit my-1">WHERE</span> {/* Changed from bg-[#5a9bd5] */}
             </div>
-            <span className="text-xs lg:text-sm xl:text-base py-1 lg:py-2 xl:py-3 text-[#3B3B3B] font-fredoka w-1/2">{where}</span> {/* Changed from text-[#5a9bd5] */}
+            <span className="text-xs lg:text-sm xl:text-base py-1 lg:py-2 xl:py-3 text-gray-600 font-fredoka w-1/2">{where}</span>
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ const MenuButton = ({
   width = 24,
   height = 24,
   strokeWidth = 1,
-  color = "#ff9945", // Changed from "#3B3B3B" to orange
+  color = "#F8C46F", // Changed from "#ff9945" to #F8C46F
   transition = {},
   lineProps = {},
   ...props
@@ -234,7 +234,7 @@ export default function StickyHeader() {
           }}
         >
           <Image 
-            src="/logo.svg" 
+            src="/logo2.svg" 
             alt="Logo" 
             width={29} 
             height={29}
@@ -245,7 +245,7 @@ export default function StickyHeader() {
       {/* Desktop Navigation Container */}
       <motion.div 
         className={`absolute hidden md:block md:left-1/2 md:transform md:-translate-x-1/2 px-4 py-2 rounded-full backdrop-blur-sm transition-all duration-300 ${
-          scrolled ? 'bg-[#ff9945] border border-transparent' : 'bg-white/50 border border-transparent'
+          scrolled ? 'bg-[#F8C46F] border border-transparent' : 'bg-white/50 border border-transparent'
         }`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -262,8 +262,8 @@ export default function StickyHeader() {
               whileHover={{ y: '-1.25rem' }}
               transition={{ duration: 0.2 }}
             >
-              <span className={scrolled ? 'text-white' : 'text-[#ff9945]'}>FEATURES</span>
-              <span className={scrolled ? 'text-white' : 'text-[#ff9945]'}>FEATURES</span>
+              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>FEATURES</span>
+              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>FEATURES</span>
             </motion.a>
           </div>
           
@@ -277,8 +277,8 @@ export default function StickyHeader() {
               whileHover={{ y: '-1.25rem' }}
               transition={{ duration: 0.2 }}
             >
-              <span className={scrolled ? 'text-white' : 'text-[#ff9945]'}>FAQ</span>
-              <span className={scrolled ? 'text-white' : 'text-[#ff9945]'}>FAQ</span>
+              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>FAQ</span>
+              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>FAQ</span>
             </motion.a>
           </div>
           
@@ -291,8 +291,8 @@ export default function StickyHeader() {
               whileHover={{ y: '-1.25rem' }}
               transition={{ duration: 0.2 }}
             >
-              <span className={scrolled ? 'text-white' : 'text-[#ff9945]'}>BLOG</span>
-              <span className={scrolled ? 'text-white' : 'text-[#ff9945]'}>BLOG</span>
+              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>BLOG</span>
+              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>BLOG</span>
             </motion.a>
           </div>
         </nav>
@@ -304,7 +304,7 @@ export default function StickyHeader() {
           isOpen={mobileNavOpen}
           onClick={() => setMobileNavOpen(!mobileNavOpen)}
           strokeWidth="6"
-          color="#ff9945" // Changed from "#3B3B3B" to orange
+          color="#F8C46F" // Changed from "#ff9945" to #F8C46F
           lineProps={{ strokeLinecap: "round" }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
           width="24"
@@ -360,23 +360,23 @@ export default function StickyHeader() {
             
             {/* Footer section for mobile menu similar to screenshot */}
             <motion.div 
-              className="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-8 text-center text-sm text-[#3B3B3B]"
+              className="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-8 text-center text-sm text-gray-600"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
               <p className="mb-3">Connect</p>
               <div className="flex space-x-6 mb-4">
-                <a href="https://linkedin.com" className="hover:text-[#ff9945] transition-colors">
+                <a href="https://linkedin.com" className="hover:text-[#F8C46F] transition-colors">
                   <IconBrandLinkedinFilled size={24} />
                 </a>
-                <a href="https://github.com" className="hover:text-[#ff9945] transition-colors">
+                <a href="https://github.com" className="hover:text-[#F8C46F] transition-colors">
                   <IconBrandGithubFilled size={24} />
                 </a>
               </div>
               
               <div className="mb-4">
-                <a href="mailto:hello@toyfight.co" className="hover:text-[#ff9945]">hello@toyfight.co</a>
+                <a href="mailto:hello@toyfight.co" className="hover:text-[#F8C46F]">hello@toyfight.co</a>
               </div>
               
               <p className="text-xs">© 2025 ToyFight® All Rights Reserved</p>
