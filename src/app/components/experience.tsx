@@ -28,11 +28,11 @@ export default function Experience({
   when,
   where,
   tags,
-  color = "#3B3B3B", // Default color
+  color = "#3B3B3B",
 }: ExperienceProps) {
   return (
     <motion.div 
-      className="rounded-2xl bg-white border-2 border-[#3B3B3B] p-6 md:p-6 lg:p-12 xl:p-12" // Changed from border-[#5a9bd5]
+      className="rounded-2xl bg-white border border-[#3B3B3B] p-6 md:p-6 lg:p-12 xl:p-12"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -78,8 +78,8 @@ export default function Experience({
       {/* Mobile-only WHEN/WHERE section that appears between quote and divider */}
       <div className="grid grid-cols-2 gap-4 mt-6 mb-8 md:hidden">
         <div className="flex flex-col gap-4">
-          <span className="bg-[#3B3B3B] text-white px-4 py-1 rounded-full text-sm font-fredoka inline-block w-fit">WHEN</span> {/* Changed from bg-[#5a9bd5] */}
-          <span className="bg-[#3B3B3B] text-white px-4 py-1 rounded-full text-sm font-fredoka inline-block w-fit">WHERE</span> {/* Changed from bg-[#5a9bd5] */}
+          <span className="bg-[#3B3B3B] text-white px-4 py-1 rounded-full text-sm font-fredoka inline-block w-fit">WHEN</span>
+          <span className="bg-[#3B3B3B] text-white px-4 py-1 rounded-full text-sm font-fredoka inline-block w-fit">WHERE</span>
         </div>
         <div className="flex flex-col gap-4">
           <span className="text-sm py-1 text-gray-600 font-fredoka">{when}</span>
@@ -87,8 +87,8 @@ export default function Experience({
         </div>
       </div>
 
-      {/* Divider line - now #3B3B3B and thicker */}
-      <hr className="my-6 md:my-4 lg:my-8 xl:my-8 border-[#3B3B3B] border-[1.5px]" /> {/* Changed from border-[#5a9bd5] */}
+      {/* Divider line - now thinner */}
+      <hr className="my-6 md:my-4 lg:my-8 xl:my-8 border-[#3B3B3B] border-t" />
 
       {/* Bottom section - maintain the same three-column grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 lg:gap-8 xl:gap-8">
@@ -98,7 +98,7 @@ export default function Experience({
             {tags.map((tag, index) => (
               <span 
                 key={index} 
-                className="px-4 py-1 md:px-3 md:py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full border border-[#3B3B3B] text-[#3B3B3B] text-sm md:text-xs lg:text-sm xl:text-base font-fredoka inline-flex items-center h-fit my-1" // Changed from border-[#5a9bd5] and text-[#5a9bd5]
+                className="px-4 py-1 md:px-3 md:py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full border border-[#3B3B3B] text-[#3B3B3B] text-sm md:text-xs lg:text-sm xl:text-base font-fredoka inline-flex items-center h-fit my-1"
               >
                 {tag.label}
               </span>
@@ -114,14 +114,14 @@ export default function Experience({
           {/* Row 1 */}
           <div className="flex gap-2 lg:gap-2 xl:gap-4">
             <div className="w-1/2 py-0.5">
-              <span className="bg-[#3B3B3B] text-xs lg:text-sm xl:text-base text-white px-3 py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full font-fredoka inline-flex items-center h-fit my-1">WHEN</span> {/* Changed from bg-[#5a9bd5] */}
+              <span className="bg-[#3B3B3B] text-xs lg:text-sm xl:text-base text-white px-3 py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full font-fredoka inline-flex items-center h-fit my-1">WHEN</span>
             </div>
             <span className="text-xs lg:text-sm xl:text-base py-1 lg:py-2 xl:py-3 text-gray-600 font-fredoka w-1/2">{when}</span>
           </div>
           {/* Row 2 */}
           <div className="flex gap-2 lg:gap-2 xl:gap-4">
             <div className="w-1/2 py-0.5">
-              <span className="bg-[#3B3B3B] text-xs lg:text-sm xl:text-base text-white px-3 py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full font-fredoka inline-flex items-center h-fit my-1">WHERE</span> {/* Changed from bg-[#5a9bd5] */}
+              <span className="bg-[#3B3B3B] text-xs lg:text-sm xl:text-base text-white px-3 py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full font-fredoka inline-flex items-center h-fit my-1">WHERE</span>
             </div>
             <span className="text-xs lg:text-sm xl:text-base py-1 lg:py-2 xl:py-3 text-gray-600 font-fredoka w-1/2">{where}</span>
           </div>
