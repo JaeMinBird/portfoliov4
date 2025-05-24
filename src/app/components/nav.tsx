@@ -252,47 +252,48 @@ export default function StickyHeader() {
         transition={{ duration: 0.5 }}
       >
         <nav className="flex items-center space-x-8">
-          {/* Features Link with slide effect - exact height of text */}
+          {/* Experience Link with slide effect - exact height of text */}
           <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
             <motion.a 
-              href="#features" 
+              href="#experience" 
               className={`text-xl font-medium flex flex-col leading-none ${scrolled ? 'text-white' : 'text-[#3B3B3B]'}`}
               style={{ fontFamily: 'var(--font-fredoka)' }}
-              onClick={(e) => scrollToSection('features', e)}
+              onClick={(e) => scrollToSection('experience', e)}
               whileHover={{ y: '-1.25rem' }}
               transition={{ duration: 0.2 }}
             >
-              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>FEATURES</span>
-              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>FEATURES</span>
+              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>EXPERIENCE</span>
+              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>EXPERIENCE</span>
             </motion.a>
           </div>
           
-          {/* FAQ Link with slide effect - exact height of text */}
+          {/* Projects Link with slide effect - exact height of text */}
           <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
             <motion.a 
-              href="#faq" 
+              href="#projects" 
               className={`text-xl font-medium flex flex-col leading-none ${scrolled ? 'text-white' : 'text-[#3B3B3B]'}`}
               style={{ fontFamily: 'var(--font-fredoka)' }}
-              onClick={(e) => scrollToSection('faq', e)}
+              onClick={(e) => scrollToSection('projects', e)}
               whileHover={{ y: '-1.25rem' }}
               transition={{ duration: 0.2 }}
             >
-              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>FAQ</span>
-              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>FAQ</span>
+              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>PROJECTS</span>
+              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>PROJECTS</span>
             </motion.a>
           </div>
           
-          {/* BLOG Link with slide effect - exact height of text */}
+          {/* Connect Link with slide effect - exact height of text */}
           <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
             <motion.a 
-              href="/blog" 
+              href="#connect" 
               className={`text-xl font-medium flex flex-col leading-none ${scrolled ? 'text-white' : 'text-[#3B3B3B]'}`}
               style={{ fontFamily: 'var(--font-fredoka)' }}
+              onClick={(e) => scrollToSection('connect', e)}
               whileHover={{ y: '-1.25rem' }}
               transition={{ duration: 0.2 }}
             >
-              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>BLOG</span>
-              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>BLOG</span>
+              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>CONNECT</span>
+              <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>CONNECT</span>
             </motion.a>
           </div>
         </nav>
@@ -304,7 +305,7 @@ export default function StickyHeader() {
           isOpen={mobileNavOpen}
           onClick={() => setMobileNavOpen(!mobileNavOpen)}
           strokeWidth="6"
-          color="#F8C46F" // Changed from "#ff9945" to #F8C46F
+          color="#F8C46F"
           lineProps={{ strokeLinecap: "round" }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
           width="24"
@@ -324,37 +325,37 @@ export default function StickyHeader() {
           >
             <nav className="flex flex-col items-center space-y-8 py-65">
               <motion.a
-                href="#features"
+                href="#experience"
                 className="text-4xl font-bold text-[#3B3B3B]"
                 style={{ fontFamily: 'var(--font-fredoka)' }}
-                onClick={(e) => scrollToSection('features', e)}
+                onClick={(e) => scrollToSection('experience', e)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
               >
-                FEATURES
+                EXPERIENCE
               </motion.a>
               <motion.a
-                href="#faq"
+                href="#projects"
                 className="text-4xl font-bold text-[#3B3B3B]"
                 style={{ fontFamily: 'var(--font-fredoka)' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                onClick={(e) => scrollToSection('faq', e)}
+                onClick={(e) => scrollToSection('projects', e)}
               >
-                FAQ
+                PROJECTS
               </motion.a>
               <motion.a
-                href="/blog"
+                href="#connect"
                 className="text-4xl font-bold text-[#3B3B3B]"
                 style={{ fontFamily: 'var(--font-fredoka)' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                onClick={() => setMobileNavOpen(false)}
+                onClick={(e) => scrollToSection('connect', e)}
               >
-                BLOG
+                CONNECT
               </motion.a>
               <motion.a
                 href="/resume"

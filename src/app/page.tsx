@@ -9,7 +9,7 @@ export default function Home() {
       <StickyHeader />
       {/* This is a blank slate site with Black Han Sans and Fredoka fonts applied */}
       <div className="container mx-auto py-20 px-4">
-        <section className="mb-24">
+        <section id="experience" className="mb-24">
           <div className="mt-10 md:mt-16">
             <Header id={1} total={3} title="experience" color="#5a9bd5" />
           </div>
@@ -18,7 +18,7 @@ export default function Home() {
           </div>
         </section>
         
-        <section className="mb-24">
+        <section id="projects" className="mb-24">
           <div className="mt-10 md:mt-16">
             <Header id={2} total={3} title="projects" color="#6ABF6F" />
           </div>
@@ -27,7 +27,7 @@ export default function Home() {
           </div>
         </section>
         
-        <section className="mb-24">
+        <section id="connect" className="mb-24">
           <div className="mt-10 md:mt-16">
             <Header id={3} total={3} title="connect" color="#ff6b6b" />
           </div>
