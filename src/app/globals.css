@@ -10,7 +10,3 @@ body {
   color: #3B3B3B;
   font-family: var(--fredoka), sans-serif;
 }
-
-h1, h2, h4, h5, h6 {
-  font-family: var(--black-han-sans), sans-serif;
-}
