@@ -356,6 +356,17 @@ export default function StickyHeader() {
               >
                 BLOG
               </motion.a>
+              <motion.a
+                href="/resume"
+                className="text-4xl font-bold text-[#3B3B3B]"
+                style={{ fontFamily: 'var(--font-fredoka)' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                onClick={() => setMobileNavOpen(false)}
+              >
+                RESUME
+              </motion.a>
             </nav>
             
             {/* Footer section for mobile menu similar to screenshot */}
@@ -363,7 +374,7 @@ export default function StickyHeader() {
               className="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-8 text-center text-sm text-gray-600"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.5 }}
             >
               <p className="mb-3">Connect</p>
               <div className="flex space-x-6 mb-4">
