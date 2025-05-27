@@ -6,8 +6,6 @@ import { motion } from 'framer-motion';
 interface FollowingEyesProps {
   socialLinks?: {
     instagram?: string;
-    behance?: string;
-    facebook?: string;
     linkedin?: string;
     [key: string]: string | undefined;
   };
@@ -16,8 +14,6 @@ interface FollowingEyesProps {
 const FollowingEyes: React.FC<FollowingEyesProps> = ({ 
   socialLinks = {
     instagram: 'https://instagram.com',
-    behance: 'https://behance.com',
-    facebook: 'https://facebook.com',
     linkedin: 'https://linkedin.com',
   }
 }) => {
@@ -81,8 +77,6 @@ const FollowingEyes: React.FC<FollowingEyesProps> = ({
 
   const socialPlatforms = [
     { name: 'INSTAGRAM', href: socialLinks.instagram },
-    { name: 'BEHANCE', href: socialLinks.behance },
-    { name: 'FACEBOOK', href: socialLinks.facebook },
     { name: 'LINKEDIN', href: socialLinks.linkedin }
   ];
   
@@ -94,7 +88,7 @@ const FollowingEyes: React.FC<FollowingEyesProps> = ({
       {isMobile ? (
         // Mobile Layout
         <>
-          {/* Eyes at top */}
+          {/* Eyes at top looking down */}
           <div className="flex items-center justify-center gap-8 mb-16">
             {/* Left Eye */}
             <div 
@@ -105,7 +99,10 @@ const FollowingEyes: React.FC<FollowingEyesProps> = ({
               <div className="w-16 h-16 bg-white rounded-full absolute flex items-center justify-center">
                 <div 
                   className="w-8 h-8 rounded-full absolute"
-                  style={{ backgroundColor: '#3B3B3B' }}
+                  style={{ 
+                    backgroundColor: '#3B3B3B',
+                    transform: 'translate(3px, 12px)' // Looking more down and slightly inward
+                  }}
                 />
               </div>
             </div>
@@ -119,7 +116,10 @@ const FollowingEyes: React.FC<FollowingEyesProps> = ({
               <div className="w-16 h-16 bg-white rounded-full absolute flex items-center justify-center">
                 <div 
                   className="w-8 h-8 rounded-full absolute"
-                  style={{ backgroundColor: '#3B3B3B' }}
+                  style={{ 
+                    backgroundColor: '#3B3B3B',
+                    transform: 'translate(-3px, 12px)' // Looking more down and slightly inward
+                  }}
                 />
               </div>
             </div>
@@ -154,32 +154,6 @@ const FollowingEyes: React.FC<FollowingEyesProps> = ({
               style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)' }}
             >
               INSTAGRAM
-            </a>
-          </div>
-          
-          {/* Left Text */}
-          <div className="absolute left-8 top-1/2 transform -translate-y-1/2">
-            <a
-              href={socialLinks.behance}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-8xl lg:text-9xl font-extrabold leading-none cursor-pointer whitespace-nowrap"
-              style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)' }}
-            >
-              BEHANCE
-            </a>
-          </div>
-          
-          {/* Right Text */}
-          <div className="absolute right-8 top-1/2 transform -translate-y-1/2">
-            <a
-              href={socialLinks.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-8xl lg:text-9xl font-extrabold leading-none cursor-pointer whitespace-nowrap"
-              style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)' }}
-            >
-              FACEBOOK
             </a>
           </div>
           
