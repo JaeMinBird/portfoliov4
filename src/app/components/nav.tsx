@@ -201,17 +201,6 @@ export default function StickyHeader() {
   
   return (
     <header className="fixed top-0 inset-x-0 z-50 h-20 flex items-center font-fredoka" style={{ fontFamily: 'var(--font-fredoka)' }}>
-      {/* Frosted glass background effect */}
-      <motion.div
-        className="absolute inset-0 backdrop-blur-md bg-gradient-to-b from-white/30 via-white/20 to-transparent pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: scrolled ? 1 : 0.7 }}
-        transition={{ duration: 0.3 }}
-        style={{
-          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%)'
-        }}
-      />
       
       {/* Logo positioned on the left side of the screen */}
       <motion.div 
@@ -244,7 +233,7 @@ export default function StickyHeader() {
       
       {/* Desktop Navigation Container */}
       <motion.div 
-        className={`absolute hidden md:block md:left-1/2 md:transform md:-translate-x-1/2 px-4 py-2 rounded-full backdrop-blur-sm transition-all duration-300 ${
+        className={`absolute hidden md:block md:left-1/2 md:transform md:-translate-x-1/2 px-4 py-2 rounded-full transition-all duration-300 ${
           scrolled ? 'bg-[#F8C46F] border border-transparent' : 'bg-white/50 border border-transparent'
         }`}
         initial={{ opacity: 0 }}
