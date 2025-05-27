@@ -2,7 +2,7 @@ import StickyHeader from './components/nav';
 import { ExperienceById } from './components/experience';
 import Header from './components/header';
 import Projects from './components/projects';
-import FollowingEyes from './components/connect';
+import Connect from './components/connect';
 
 export default function Home() {
   return (
@@ -33,7 +33,7 @@ export default function Home() {
             <Header id={3} total={3} title="connect" color="#ff6b6b" />
           </div>
           <div className="mt-6">
-            <FollowingEyes />
+            <Connect />
           </div>
         </section>
       </div>

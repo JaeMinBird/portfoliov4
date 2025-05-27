@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
-interface FollowingEyesProps {
+interface ConnectProps {
   socialLinks?: {
     instagram?: string;
     linkedin?: string;
@@ -11,7 +11,7 @@ interface FollowingEyesProps {
   };
 }
 
-const FollowingEyes: React.FC<FollowingEyesProps> = ({ 
+const Connect: React.FC<ConnectProps> = ({ 
   socialLinks = {
     instagram: 'https://instagram.com',
     linkedin: 'https://linkedin.com',
@@ -23,7 +23,7 @@ const FollowingEyes: React.FC<FollowingEyesProps> = ({
   
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
     };
     
     checkMobile();
@@ -86,7 +86,7 @@ const FollowingEyes: React.FC<FollowingEyesProps> = ({
       className={`relative w-full p-8 ${isMobile ? 'flex flex-col items-center' : 'min-h-screen flex items-center justify-center'}`}
     >
       {isMobile ? (
-        // Mobile Layout
+        // Mobile Layout (lg and below)
         <>
           {/* Eyes at top looking down */}
           <div className="flex items-center justify-center gap-8 mb-16">
@@ -125,7 +125,7 @@ const FollowingEyes: React.FC<FollowingEyesProps> = ({
             </div>
           </div>
 
-          {/* Stacked text list */}
+          {/* Stacked text list - no hover effects on mobile */}
           <div className="flex flex-col items-center space-y-6">
             {socialPlatforms.map((platform, index) => (
               <a
@@ -134,7 +134,7 @@ const FollowingEyes: React.FC<FollowingEyesProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-6xl font-extrabold leading-none"
-                style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)' }}
+                style={{ color: '#ff6b6b', fontFamily: 'var(--font-fredoka)' }}
               >
                 {platform.name}
               </a>
@@ -142,32 +142,44 @@ const FollowingEyes: React.FC<FollowingEyesProps> = ({
           </div>
         </>
       ) : (
-        // Desktop Layout
+        // Desktop Layout (xl and above)
         <>
-          {/* Top Text */}
+          {/* Top Text with rollup hover animation */}
           <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <a
-              href={socialLinks.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-8xl lg:text-9xl font-extrabold leading-none cursor-pointer"
-              style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)' }}
-            >
-              INSTAGRAM
-            </a>
+            <div className="overflow-hidden leading-none" style={{ height: '9rem' }}> {/* Increased height for better animation */}
+              <motion.a
+                href={socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-8xl lg:text-9xl font-extrabold leading-none cursor-pointer flex flex-col"
+                style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)' }}
+                initial={{ y: '1rem' }} // Start position slightly down
+                whileHover={{ y: '-8rem' }} // Increased travel distance
+                transition={{ duration: 0.2 }}
+              >
+                <span style={{ color: '#ff6b6b' }}>INSTAGRAM</span>
+                <span style={{ color: '#ff6b6b' }}>INSTAGRAM</span>
+              </motion.a>
+            </div>
           </div>
           
-          {/* Bottom Text */}
+          {/* Bottom Text with rollup hover animation */}
           <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 translate-y-1/2">
-            <a
-              href={socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-8xl lg:text-9xl font-extrabold leading-none cursor-pointer"
-              style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)' }}
-            >
-              LINKEDIN
-            </a>
+            <div className="overflow-hidden leading-none" style={{ height: '9rem' }}> {/* Increased height for better animation */}
+              <motion.a
+                href={socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-8xl lg:text-9xl font-extrabold leading-none cursor-pointer flex flex-col"
+                style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)' }}
+                initial={{ y: '1rem' }} // Start position slightly down
+                whileHover={{ y: '-8rem' }} // Increased travel distance
+                transition={{ duration: 0.2 }}
+              >
+                <span style={{ color: '#ff6b6b' }}>LINKEDIN</span>
+                <span style={{ color: '#ff6b6b' }}>LINKEDIN</span>
+              </motion.a>
+            </div>
           </div>
           
           {/* Eyes Container */}
@@ -222,4 +234,4 @@ const FollowingEyes: React.FC<FollowingEyesProps> = ({
   );
 };
 
-export default FollowingEyes;
+export default Connect;
