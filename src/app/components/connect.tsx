@@ -123,11 +123,9 @@ const Connect: React.FC<ConnectProps> = ({
                 />
               </div>
             </div>
-          </div>
-
-          {/* Stacked text list - no hover effects on mobile */}
+          </div>          {/* Stacked text list - no hover effects on mobile */}
           <div className="flex flex-col items-center space-y-6">
-            {socialPlatforms.map((platform, index) => (
+            {socialPlatforms.map((platform) => (
               <a
                 key={platform.name}
                 href={platform.href}
