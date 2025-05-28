@@ -82,7 +82,7 @@ export default function Metro() {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Key Section */}
           <div className="lg:w-[30%] order-1 lg:order-none">
-            <div className="p-6 text-center lg:text-center">
+            <div className="pt-12 pb-2 md:pt-16 md:pb-3 lg:p-6 text-center lg:text-center">
               {/* Mobile: Hide KEY text, Desktop: Show KEY text */}
               <div className="hidden lg:block">
                 <h2 className="text-4xl font-bold mb-6 text-[#3B3B3B] text-center">KEY</h2>
