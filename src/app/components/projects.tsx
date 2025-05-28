@@ -1,20 +1,21 @@
 'use client';
 
 import React, { useState } from 'react';
+import { projects, type Project } from '../data/projects';
 
 interface ProjectCardProps {
-  title: string;
-  description: string;
-  company: string;
-  year: string;
+  project: Project;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, company, year }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const [isImageHovered, setIsImageHovered] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   
   // Combined hover state for animations
   const isHovered = isImageHovered || isButtonHovered;
+  
+  // Split company string by commas and trim whitespace
+  const companyTags = project.company.split(',').map(tag => tag.trim());
   
   return (
     <div className="flex flex-col font-fredoka">
@@ -33,7 +34,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, company, 
         </div>
       </div>
       <div className="flex items-start justify-between mb-2">
-        <h3 className="text-2xl font-fredoka flex-1 mr-4">{title}</h3>
+        <h3 className="text-2xl font-fredoka flex-1 mr-4">{project.title}</h3>
         <button 
           className="bg-[#3B3B3B] text-white px-4 py-1 rounded-full text-sm font-fredoka inline-flex items-center transition-all duration-300 relative overflow-hidden cursor-pointer flex-shrink-0"
           onMouseEnter={() => setIsButtonHovered(true)}
@@ -70,50 +71,37 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, company, 
           </span>
         </button>
       </div>
-      <p className="text-gray-600 mb-4 font-fredoka">{description}</p>
-      <div className="flex items-center text-gray-500 font-fredoka">
-        <span className="font-medium">{company}</span>
-        <span className="mx-2">•</span>
-        <span>{year}</span>
+      <p className="text-gray-600 mb-4 font-fredoka">{project.description}</p>
+      <div className="flex flex-wrap items-center text-gray-500 font-fredoka gap-x-2 gap-y-1">
+        {/* Company tags with dots */}
+        <div className="flex flex-wrap items-center gap-x-2">
+          {companyTags.map((tag, index) => (
+            <React.Fragment key={index}>
+              <span className="font-medium">{tag}</span>
+              {index < companyTags.length - 1 && (
+                <span className="text-gray-400">•</span>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+        
+        {/* Separator between company tags and year */}
+        <span className="text-gray-400">•</span>
+        
+        {/* Year */}
+        <span>{project.year}</span>
       </div>
     </div>
   );
 }
 
 export default function Projects() {
-  const projects = [
-    {
-      title: "First Draft relaunch",
-      description: "Redesigning the underlying design system, creating web and mobile wireframing kits and supporting redesigning the UI as part of Figma's post-config relaunch of First Draft.",
-      company: "Figma",
-      year: "2024",
-      image: "/images/first-draft.png"
-    },
-    {
-      title: "Notifications",
-      description: "Improving the information architecture and parseability of Figma's notification feed with a visual redesign. This includes a scalable and robust system to support future notifications.",
-      company: "Figma",
-      year: "2024",
-      image: "/images/notifications.png"
-    },
-    {
-      title: "Design System",
-      description: "Building a comprehensive design system that scales across multiple products and platforms with consistent patterns and components.",
-      company: "Figma",
-      year: "2023",
-      image: "/images/design-system.png"
-    }
-  ];
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
-      {projects.map((project, index) => (
+      {projects.map((project) => (
         <ProjectCard
-          key={index}
-          title={project.title}
-          description={project.description}
-          company={project.company}
-          year={project.year}
+          key={project.id}
+          project={project}
         />
       ))}
     </div>
