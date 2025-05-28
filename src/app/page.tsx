@@ -6,7 +6,7 @@ import Connect from './components/connect';
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div className="min-h-screen w-full bg-white md:px-25">
       <StickyHeader />
       {/* This is a blank slate site with Black Han Sans and Fredoka fonts applied */}
       <div className="container mx-auto py-20 px-4">

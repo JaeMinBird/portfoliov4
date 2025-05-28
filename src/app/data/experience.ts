@@ -6,7 +6,6 @@ export type Tag = {
 
 export type ExperienceData = {
   id: string;
-  logo?: ReactNode | string;
   company: string;
   role: string;
   quote: string;
@@ -18,7 +17,6 @@ export type ExperienceData = {
 export const experienceData: Record<string, ExperienceData> = {
   peacock: {
     id: "peacock",
-    logo: "../public/logo.svg",
     company: "Peacock TV",
     role: "Design Partnership",
     quote: "Peacock has an incredible design team. Our partnership brings the best out of one other, and this relationship has shaped much about how RM thinks.",
@@ -32,7 +30,6 @@ export const experienceData: Record<string, ExperienceData> = {
   // Add more experiences here
   netflix: {
     id: "netflix",
-    logo: "/logos/netflix-logo.png", // Example using image URL
     company: "Netflix",
     role: "Senior Designer",
     quote: "Working at Netflix taught me the importance of data-driven design decisions and global scalability.",

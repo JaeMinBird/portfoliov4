@@ -38,36 +38,26 @@ export default function Experience({
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      {/* Top section - split into thirds with even spacing */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 lg:gap-8 xl:gap-8">
-        {/* First third - logo (2x bigger) */}
-        <div className="flex-shrink-0 flex justify-center md:justify-start">
-          <div className="w-[200px] md:w-[140px] lg:w-[240px] h-[200px] md:h-[140px] lg:h-[240px] flex items-center justify-center">
-            {typeof logo === "string" ? (
-              <Image src={logo as string} alt={`${company} logo`} width={240} height={240} className="md:scale-90 lg:scale-100" />
-            ) : (
-              <div className="md:scale-90 lg:scale-100">{logo}</div>
-            )}
-          </div>
-        </div>
-
-        {/* Second third - company and role side by side (on both mobile and desktop) */}
-        <div className="flex flex-row gap-4 justify-center">
+      {/* Top section - split into two columns */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-4 lg:gap-8 xl:gap-8">
+        {/* First column - company and role in vertical halves */}
+        <div className="flex flex-col md:flex-col h-full">
           <div 
-            className="text-xl md:text-lg lg:text-xl xl:text-3xl font-normal p-2 md:p-2 lg:p-4 xl:p-4 w-1/2 font-fredoka"
+            className="text-xl md:text-lg lg:text-xl xl:text-3xl font-bold md:h-1/2 font-fredoka flex items-start justify-between md:justify-start"
             style={{ color }}
           >
-            {company}
+            <span>{company}</span>
+            <span className="md:hidden font-normal">{role}</span>
           </div>
           <div 
-            className="text-xl md:text-lg lg:text-xl xl:text-3xl font-normal p-2 md:p-2 lg:p-4 xl:p-4 w-1/2 font-fredoka"
+            className="hidden md:flex text-xl md:text-lg lg:text-xl xl:text-3xl font-normal h-1/2 font-fredoka items-start"
             style={{ color }}
           >
             {role}
           </div>
         </div>
 
-        {/* Third third - quote */}
+        {/* Second column - quote */}
         <div>
           <blockquote className="text-xl md:text-base lg:text-lg xl:text-3xl font-normal leading-tight md:leading-snug lg:leading-snug xl:leading-tight font-fredoka">
             &ldquo;{quote}&rdquo;
@@ -75,56 +65,21 @@ export default function Experience({
         </div>
       </div>
 
-      {/* Mobile-only WHEN/WHERE section that appears between quote and divider */}
-      <div className="grid grid-cols-2 gap-4 mt-6 mb-8 md:hidden">
-        <div className="flex flex-col gap-4">
-          <span className="bg-[#3B3B3B] text-white px-4 py-1 rounded-full text-sm font-fredoka inline-block w-fit">WHEN</span>
-          <span className="bg-[#3B3B3B] text-white px-4 py-1 rounded-full text-sm font-fredoka inline-block w-fit">WHERE</span>
-        </div>
-        <div className="flex flex-col gap-4">
-          <span className="text-sm py-1 text-gray-600 font-fredoka">{when}</span>
-          <span className="text-sm py-1 text-gray-600 font-fredoka">{where}</span>
-        </div>
-      </div>
+      {/* Divider line */}
+      <hr className="my-6 md:my-2 lg:my-4 xl:my-4 border-[#3B3B3B] border-t" />
 
-      {/* Divider line - now thinner */}
-      <hr className="my-6 md:my-4 lg:my-8 xl:my-8 border-[#3B3B3B] border-t" />
-
-      {/* Bottom section - maintain the same three-column grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 lg:gap-8 xl:gap-8">
-        {/* First third - tags section aligns with logo column */}
-        <div>
-          <div className="flex flex-wrap gap-2 max-h-24 md:max-h-16 lg:max-h-16 xl:max-h-24">
-            {tags.map((tag, index) => (
-              <span 
-                key={index} 
-                className="px-4 py-1 md:px-3 md:py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full border border-[#3B3B3B] text-[#3B3B3B] text-sm md:text-xs lg:text-sm xl:text-base font-fredoka inline-flex items-center h-fit my-1"
-              >
-                {tag.label}
-              </span>
-            ))}
-          </div>
+      {/* Bottom section - two columns with labels and info */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-4 lg:gap-8 xl:gap-8">
+        {/* First column - When */}
+        <div className="flex items-start">
+          <span className="bg-[#3B3B3B] text-white px-3 py-1 rounded-full text-sm font-fredoka">WHEN</span>
+          <span className="ml-auto w-1/2 text-sm text-gray-600 font-fredoka px-3 py-1">{when}</span>
         </div>
 
-        {/* Second third - empty column */}
-        <div></div>
-
-        {/* Third third - attribution section aligns with quote column (desktop only) */}
-        <div className="hidden md:flex md:flex-col gap-2 lg:gap-2 xl:gap-4">
-          {/* Row 1 */}
-          <div className="flex gap-2 lg:gap-2 xl:gap-4">
-            <div className="w-1/2 py-0.5">
-              <span className="bg-[#3B3B3B] text-xs lg:text-sm xl:text-base text-white px-3 py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full font-fredoka inline-flex items-center h-fit my-1">WHEN</span>
-            </div>
-            <span className="text-xs lg:text-sm xl:text-base py-1 lg:py-2 xl:py-3 text-gray-600 font-fredoka w-1/2">{when}</span>
-          </div>
-          {/* Row 2 */}
-          <div className="flex gap-2 lg:gap-2 xl:gap-4">
-            <div className="w-1/2 py-0.5">
-              <span className="bg-[#3B3B3B] text-xs lg:text-sm xl:text-base text-white px-3 py-0.5 lg:px-3 lg:py-1 xl:px-5 xl:py-1.5 rounded-full font-fredoka inline-flex items-center h-fit my-1">WHERE</span>
-            </div>
-            <span className="text-xs lg:text-sm xl:text-base py-1 lg:py-2 xl:py-3 text-gray-600 font-fredoka w-1/2">{where}</span>
-          </div>
+        {/* Second column - Where */}
+        <div className="flex items-start">
+          <span className="bg-[#3B3B3B] text-white px-3 py-1 rounded-full text-sm font-fredoka">WHERE</span>
+          <span className="ml-auto w-1/2 text-sm text-gray-600 font-fredoka px-3 py-1">{where}</span>
         </div>
       </div>
     </motion.div>
@@ -141,7 +96,6 @@ export function ExperienceById({ id, color }: { id: string; color?: string }) {
 
   return (
     <Experience
-      logo={experienceData.logo}
       company={experienceData.company}
       role={experienceData.role}
       quote={experienceData.quote}
