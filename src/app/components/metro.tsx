@@ -195,6 +195,40 @@ export default function Metro() {
                           <div 
                             className="absolute top-2"
                             style={{ 
+                              left: lineIndex === 0 ? '-64px' : 
+                                    lineIndex === 1 ? '-48px' : 
+                                    '-32px' 
+                            }}
+                          >
+                            <div className="w-4 h-4 rounded-full border-2 border-white bg-white flex items-center justify-center">
+                              <div
+                                className="w-2 h-2 rounded-full"
+                                style={{ backgroundColor: config.color }}
+                              />
+                            </div>
+                          </div>
+
+                          {/* Stop Circle - Mobile Only */}
+                          <div 
+                            className="absolute top-2 md:hidden"
+                            style={{ 
+                              left: lineIndex === 0 ? '-64px' : 
+                                    lineIndex === 1 ? '-48px' : 
+                                    '-32px' 
+                            }}
+                          >
+                            <div className="w-4 h-4 rounded-full border-2 border-white bg-white flex items-center justify-center">
+                              <div
+                                className="w-2 h-2 rounded-full"
+                                style={{ backgroundColor: config.color }}
+                              />
+                            </div>
+                          </div>
+
+                          {/* Stop Circle - Desktop Only */}
+                          <div 
+                            className="absolute top-2 hidden md:block"
+                            style={{ 
                               left: lineIndex === 0 ? '-80px' : 
                                     lineIndex === 1 ? '-64px' : 
                                     '-48px' 
@@ -206,6 +240,24 @@ export default function Metro() {
                                 style={{ backgroundColor: config.color }}
                               />
                             </div>
+                          </div>
+
+                          {/* Connecting Line from Stop to Company - Desktop Only */}
+                          <div 
+                            className="absolute top-3 hidden md:block"
+                            style={{ 
+                              left: lineIndex === 0 ? '-76px' : 
+                                    lineIndex === 1 ? '-60px' : 
+                                    '-44px',
+                              width: lineIndex === 0 ? '88px' : 
+                                     lineIndex === 1 ? '72px' : 
+                                     '56px'
+                            }}
+                          >
+                            <div
+                              className="h-2 rounded-full"
+                              style={{ backgroundColor: config.color }}
+                            />
                           </div>
 
                           {/* Content */}
