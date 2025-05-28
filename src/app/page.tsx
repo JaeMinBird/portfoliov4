@@ -12,7 +12,7 @@ export default function Home() {
       <div className="container mx-auto py-20 px-4">
         <section id="experience" className="mb-24">
           <div className="mt-10 md:mt-16">
-            <Header id={1} total={3} title="experience" color="#5a9bd5" />
+            <Header id={1} total={3} title="experience" color="#6ABF6F" />
           </div>
           <div className="mt-10 md:mt-16">
             <Metro />
@@ -21,7 +21,7 @@ export default function Home() {
         
         <section id="projects" className="mb-24">
           <div className="mt-10 md:mt-16">
-            <Header id={2} total={3} title="projects" color="#6ABF6F" />
+            <Header id={2} total={3} title="projects" color="#5a9bd5" />
           </div>
           <div className="mt-6">
             <Projects />

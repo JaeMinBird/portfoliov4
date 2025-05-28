@@ -179,25 +179,7 @@ export default function Metro() {
                             </div>
                           </div>
 
-                          {/* Connecting Line from Stop to Company - Desktop Only */}
-                          <div 
-                            className="absolute top-3 hidden md:block"
-                            style={{ 
-                              left: lineIndex === 0 ? '-76px' : 
-                                    lineIndex === 1 ? '-60px' : 
-                                    '-44px',
-                              width: lineIndex === 0 ? '88px' : 
-                                     lineIndex === 1 ? '72px' : 
-                                     '56px'
-                            }}
-                          >
-                            <div
-                              className="h-2 rounded-full"
-                              style={{ backgroundColor: config.color }}
-                            />
-                          </div>
-
-                          {/* Content (Text Information / Labels*/}
+                          {/* Experience Content */}
                           <div className="ml-4 grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                             {/* Left Column - Company Info */}
                             <div>

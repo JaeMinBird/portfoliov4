@@ -15,9 +15,9 @@ export interface LineConfig {
 }
 
 export const lineConfigs: Record<string, LineConfig> = {
-  I: { label: 'Internship', color: '#3B82F6', letter: 'I' }, // blue
-  R: { label: 'Research', color: '#EF4444', letter: 'R' }, // red
-  S: { label: 'Startup', color: '#10B981', letter: 'S' }, // green
+  I: { label: 'Internship', color: '#5a9bd5', letter: 'I' }, // blue
+  R: { label: 'Research', color: '#ff6b6b', letter: 'R' }, // red
+  S: { label: 'Startup', color: '#6ABF6F', letter: 'S' }, // green
 };
 
 export const experiences: Experience[] = [
