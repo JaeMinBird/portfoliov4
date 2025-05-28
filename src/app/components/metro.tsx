@@ -191,22 +191,6 @@ export default function Metro() {
                           }}
                           transition={{ duration: 0.3, delay: expIndex * 0.1 }}
                         >
-                          {/* Stop Circle */}
-                          <div 
-                            className="absolute top-2"
-                            style={{ 
-                              left: lineIndex === 0 ? '-64px' : 
-                                    lineIndex === 1 ? '-48px' : 
-                                    '-32px' 
-                            }}
-                          >
-                            <div className="w-4 h-4 rounded-full border-2 border-white bg-white flex items-center justify-center">
-                              <div
-                                className="w-2 h-2 rounded-full"
-                                style={{ backgroundColor: config.color }}
-                              />
-                            </div>
-                          </div>
 
                           {/* Stop Circle - Mobile Only */}
                           <div 
