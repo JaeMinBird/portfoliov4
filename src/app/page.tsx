@@ -16,7 +16,6 @@ export default function Home() {
             <Header id={1} total={3} title="experience" color="#5a9bd5" />
           </div>
           <div className="mt-10 md:mt-16">
-            <ExperienceById id="peacock" color="#5a9bd5"/>
             <Metro />
           </div>
         </section>

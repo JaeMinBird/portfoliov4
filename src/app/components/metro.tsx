@@ -2,59 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-interface Experience {
-  id: string;
-  line: 'I' | 'R' | 'S';
-  company: string;
-  what: string;
-  when: string;
-  where: string;
-  description: string;
-}
-
-interface LineConfig {
-  label: string;
-  color: string;
-  letter: 'I' | 'R' | 'S';
-}
-
-const lineConfigs: Record<string, LineConfig> = {
-  I: { label: 'Internship', color: '#3B82F6', letter: 'I' }, // blue
-  R: { label: 'Research', color: '#EF4444', letter: 'R' }, // red
-  S: { label: 'Startup', color: '#10B981', letter: 'S' }, // green
-};
-
-// Sample data - replace with your actual experiences
-const experiences: Experience[] = [
-  {
-    id: '1',
-    line: 'I',
-    company: 'Tech Corp',
-    what: 'Software Engineer Intern',
-    when: 'Summer 2024',
-    where: 'San Francisco, CA',
-    description: 'Developed scalable web applications using React and Node.js. Collaborated with cross-functional teams to deliver high-quality software solutions.'
-  },
-  {
-    id: '2',
-    line: 'R',
-    company: 'University Lab',
-    what: 'Research Assistant',
-    when: '2023-2024',
-    where: 'University Campus',
-    description: 'Conducted research on machine learning algorithms for natural language processing. Published findings in peer-reviewed conferences.'
-  },
-  {
-    id: '3',
-    line: 'S',
-    company: 'StartupCo',
-    what: 'Co-founder & CTO',
-    when: '2022-Present',
-    where: 'Remote',
-    description: 'Founded and built a SaaS platform from the ground up. Led technical architecture decisions and managed a team of 5 developers.'
-  },
-];
+import { Experience, experiences, lineConfigs } from '../data/metro';
 
 export default function Metro() {
   const [visibleLines, setVisibleLines] = useState<Set<string>>(new Set(['I', 'R', 'S']));
@@ -181,7 +129,7 @@ export default function Metro() {
               {/* Experience Entries */}
               <div className="ml-16 md:ml-20 space-y-12">
                 {Object.entries(groupedExperiences).map(([lineKey, lineExperiences]) => (
-                  <div key={lineKey}>
+                  <div key={lineKey} className="space-y-12">
                     {lineExperiences.map((experience, expIndex) => {
                       const lineIndex = Object.keys(lineConfigs).indexOf(lineKey);
                       const config = lineConfigs[lineKey];
