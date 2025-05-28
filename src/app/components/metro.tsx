@@ -154,7 +154,7 @@ export default function Metro() {
           <div className="lg:w-[70%] order-2 lg:order-none">
             <div className="relative p-4 md:p-8 min-h-[600px]">
               {/* Vertical Lines */}
-              <div className="absolute left-4 md:left-8 top-8 bottom-8 flex">
+              <div className="absolute left-4 md:left-8 top-4 md:top-8 bottom-4 md:bottom-8 flex">
                 {Object.entries(lineConfigs).map(([key, config], index) => (
                   <motion.div
                     key={key}
@@ -244,8 +244,8 @@ export default function Metro() {
                             />
                           </div>
 
-                          {/* Content */}
-                          <div className="ml-12 grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                          {/* Content (Text Information / Labels*/}
+                          <div className="ml-4 grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
                             {/* Left Column - Company Info */}
                             <div>
                               <h3 
