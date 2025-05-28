@@ -82,18 +82,23 @@ export default function Metro() {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Key Section */}
           <div className="lg:w-[30%] order-1 lg:order-none">
-            <div className="p-6 text-center">
-              <h2 className="text-3xl font-bold mb-6 text-[#3B3B3B]">KEY</h2>
-              <div className="space-y-4">
+            <div className="p-6 text-center lg:text-center">
+              {/* Mobile: Hide KEY text, Desktop: Show KEY text */}
+              <div className="hidden lg:block">
+                <h2 className="text-4xl font-bold mb-6 text-[#3B3B3B] text-center">KEY</h2>
+              </div>
+              
+              {/* Keys layout */}
+              <div className="flex flex-col space-y-4 items-center lg:flex-col lg:space-y-4 lg:items-center sm:flex-row sm:justify-evenly sm:space-y-0">
                 {Object.entries(lineConfigs).map(([key, config]) => (
                   <motion.div
                     key={key}
-                    className="flex items-center gap-3 cursor-pointer justify-center"
+                    className="flex items-center cursor-pointer w-36 mx-auto lg:w-36 lg:mx-auto sm:w-auto sm:mx-0"
                     onClick={() => toggleLine(key)}
                     onHoverStart={() => setHoveredKey(key)}
                     onHoverEnd={() => setHoveredKey(null)}
                   >
-                    <div className="relative w-8 h-8">
+                    <div className="relative w-8 h-8 flex-shrink-0"> {/* Circle stays at left of container */}
                       {/* Outer circle (outline) */}
                       <motion.div 
                         className="absolute inset-0 w-8 h-8 rounded-full border-2"
@@ -139,7 +144,7 @@ export default function Metro() {
                       )}
                     </div>
                     <span 
-                      className="text-lg font-medium select-none"
+                      className="text-lg font-medium select-none ml-3" // Fixed margin instead of gap
                       style={{ color: config.color }}
                     >
                       {config.label}
