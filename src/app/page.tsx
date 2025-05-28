@@ -3,6 +3,7 @@ import { ExperienceById } from './components/experience';
 import Header from './components/header';
 import Projects from './components/projects';
 import Connect from './components/connect';
+import Metro from './components/metro';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
           </div>
           <div className="mt-10 md:mt-16">
             <ExperienceById id="peacock" color="#5a9bd5"/>
+            <Metro />
           </div>
         </section>
         
