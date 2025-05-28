@@ -1,5 +1,4 @@
 import StickyHeader from './components/nav';
-import { ExperienceById } from './components/experience';
 import Header from './components/header';
 import Projects from './components/projects';
 import Connect from './components/connect';
