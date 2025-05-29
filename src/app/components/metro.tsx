@@ -33,13 +33,17 @@ export default function Metro() {
             <div className="pt-4 pb-2 md:pt-4 md:pb-3 lg:p-6 text-center lg:text-center">
               {/* Desktop: Show KEY text */}
               <div className="hidden lg:block">
-                <h2 className="text-4xl font-bold mb-6 text-[#3B3B3B] text-center">KEY</h2>
+                <h2 className="text-4xl font-bold mb-2 text-[#3B3B3B] text-center">KEY</h2>
+                <p className="text-sm text-gray-600 mb-6 text-center">click to filter</p>
               </div>
               
               {/* Mobile vertical: Show KEY text on left, bigger */}
               <div className="w-full flex justify-center">
                 <div className="flex sm:hidden items-center mb-4">
-                  <h2 className="text-5xl font-bold text-[#3B3B3B] mr-6 flex-shrink-0">KEY</h2>
+                  <div className="flex flex-col mr-6 flex-shrink-0">
+                    <h2 className="text-5xl font-bold text-[#3B3B3B]">KEY</h2>
+                    <p className="text-xs text-gray-600 mt-1">tap to filter</p>
+                  </div>
                   <div className="flex flex-col space-y-4 items-start flex-1">
                     {Object.entries(lineConfigs).map(([key, config]) => (
                       <motion.div
@@ -109,6 +113,7 @@ export default function Metro() {
               {/* Tablet horizontal: Show KEY text above */}
               <div className="hidden sm:block lg:hidden">
                 <h2 className="text-4xl font-bold mb-2 text-[#3B3B3B] text-center">KEY</h2>
+                <p className="text-xs text-gray-600 mt-1 mb-4">tap to filter</p>
               </div>
               
               {/* Keys layout for tablet horizontal */}
