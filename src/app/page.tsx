@@ -14,7 +14,7 @@ export default function Home() {
           <div className="mt-10 md:mt-16">
             <Header id={1} total={3} title="experience" color="#6ABF6F" />
           </div>
-          <div className="mt-10 md:mt-16">
+          <div className="mt-10 md:mt-6">
             <Metro />
           </div>
         </section>
