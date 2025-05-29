@@ -27,80 +27,82 @@ export default function Metro() {
   return (
     <div className="p-0 md:p-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-6">
           {/* Key Section */}
           <div className="lg:w-[30%] order-1 lg:order-none">
-            <div className="pt-12 pb-2 md:pt-8 md:pb-3 lg:p-6 text-center lg:text-center">
+            <div className="pt-4 pb-2 md:pt-4 md:pb-3 lg:p-6 text-center lg:text-center">
               {/* Desktop: Show KEY text */}
               <div className="hidden lg:block">
                 <h2 className="text-4xl font-bold mb-6 text-[#3B3B3B] text-center">KEY</h2>
               </div>
               
               {/* Mobile vertical: Show KEY text on left, bigger */}
-              <div className="flex sm:hidden items-center justify-center mb-4">
-                <h2 className="text-5xl font-bold text-[#3B3B3B] mr-6 flex-shrink-0">KEY</h2>
-                <div className="flex flex-col space-y-4 items-start flex-1">
-                  {Object.entries(lineConfigs).map(([key, config]) => (
-                    <motion.div
-                      key={key}
-                      className="flex items-center cursor-pointer"
-                      onClick={() => toggleLine(key)}
-                      onHoverStart={() => setHoveredKey(key)}
-                      onHoverEnd={() => setHoveredKey(null)}
-                    >
-                      <div className="relative w-8 h-8 flex-shrink-0">
-                        {/* Outer circle (outline) */}
-                        <motion.div 
-                          className="absolute inset-0 w-8 h-8 rounded-full border-2"
-                          style={{ 
-                            borderColor: config.color
-                          }}
-                          animate={{
-                            scale: !visibleLines.has(key) && hoveredKey === key ? 0.8 : 1,
-                          }}
-                          transition={{ duration: 0.2 }}
-                        />
-                        {/* Inner circle */}
-                        <motion.div
-                          className="absolute inset-0 w-8 h-8 rounded-full flex items-center justify-center"
-                          style={{ 
-                            backgroundColor: visibleLines.has(key) ? config.color : 'transparent'
-                          }}
-                          animate={{
-                            scale: visibleLines.has(key) ? (hoveredKey === key ? 0.7 : 1) : 0,
-                          }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <motion.span
-                            className="text-sm font-bold text-white select-none pointer-events-none"
-                            animate={{
-                              scale: visibleLines.has(key) ? 1 : 0,
+              <div className="w-full flex justify-center">
+                <div className="flex sm:hidden items-center mb-4">
+                  <h2 className="text-5xl font-bold text-[#3B3B3B] mr-6 flex-shrink-0">KEY</h2>
+                  <div className="flex flex-col space-y-4 items-start flex-1">
+                    {Object.entries(lineConfigs).map(([key, config]) => (
+                      <motion.div
+                        key={key}
+                        className="flex items-center cursor-pointer"
+                        onClick={() => toggleLine(key)}
+                        onHoverStart={() => setHoveredKey(key)}
+                        onHoverEnd={() => setHoveredKey(null)}
+                      >
+                        <div className="relative w-8 h-8 flex-shrink-0">
+                          {/* Outer circle (outline) */}
+                          <motion.div 
+                            className="absolute inset-0 w-8 h-8 rounded-full border-2"
+                            style={{ 
+                              borderColor: config.color
                             }}
-                          >
-                            {config.letter}
-                          </motion.span>
-                        </motion.div>
-                        {/* Letter when toggled off */}
-                        {!visibleLines.has(key) && (
-                          <motion.span
-                            className="absolute inset-0 flex items-center justify-center text-sm font-bold select-none pointer-events-none"
-                            style={{ color: config.color }}
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1.2 }}
+                            animate={{
+                              scale: !visibleLines.has(key) && hoveredKey === key ? 0.8 : 1,
+                            }}
+                            transition={{ duration: 0.2 }}
+                          />
+                          {/* Inner circle */}
+                          <motion.div
+                            className="absolute inset-0 w-8 h-8 rounded-full flex items-center justify-center"
+                            style={{ 
+                              backgroundColor: visibleLines.has(key) ? config.color : 'transparent'
+                            }}
+                            animate={{
+                              scale: visibleLines.has(key) ? (hoveredKey === key ? 0.7 : 1) : 0,
+                            }}
                             transition={{ duration: 0.2 }}
                           >
-                            {config.letter}
-                          </motion.span>
-                        )}
-                      </div>
-                      <span 
-                        className="text-lg font-medium select-none ml-3"
-                        style={{ color: config.color }}
-                      >
-                        {config.label}
-                      </span>
-                    </motion.div>
-                  ))}
+                            <motion.span
+                              className="text-sm font-bold text-white select-none pointer-events-none"
+                              animate={{
+                                scale: visibleLines.has(key) ? 1 : 0,
+                              }}
+                            >
+                              {config.letter}
+                            </motion.span>
+                          </motion.div>
+                          {/* Letter when toggled off */}
+                          {!visibleLines.has(key) && (
+                            <motion.span
+                              className="absolute inset-0 flex items-center justify-center text-sm font-bold select-none pointer-events-none"
+                              style={{ color: config.color }}
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1.2 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {config.letter}
+                            </motion.span>
+                          )}
+                        </div>
+                        <span 
+                          className="text-lg font-medium select-none ml-3"
+                          style={{ color: config.color }}
+                        >
+                          {config.label}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
