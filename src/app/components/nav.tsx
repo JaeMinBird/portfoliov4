@@ -200,17 +200,17 @@ export default function StickyHeader() {
   };
   
   return (
-    <header className="fixed top-0 inset-x-0 z-50 h-20 flex items-center font-fredoka" style={{ fontFamily: 'var(--font-fredoka)' }}>
+    <header className="fixed top-0 inset-x-0 z-50 h-20 flex items-center font-fredoka pointer-events-none" style={{ fontFamily: 'var(--font-fredoka)' }}>
       
       {/* Logo positioned on the left side of the screen */}
       <motion.div 
-        className="absolute left-6 md:left-12 z-[70]" // Increased left padding on desktop
+        className="absolute left-6 md:left-12 z-[70] pointer-events-auto" // Added pointer-events-auto
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
         <motion.div
-          className={`${isMobile ? 'w-[29px] h-[29px]' : 'w-[29px] h-[29px]'} cursor-pointer`} // All logos 29px (30% larger)
+          className={`${isMobile ? 'w-[29px] h-[29px]' : 'w-[29px] h-[29px]'} cursor-pointer`}
           whileHover={!isMobile ? { rotate: 218 } : undefined}
           animate={mobileNavOpen ? { rotate: 218 } : { rotate: 0 }}
           transition={{ duration: 0.5 }}
@@ -233,7 +233,7 @@ export default function StickyHeader() {
       
       {/* Desktop Navigation Container */}
       <motion.div 
-        className={`absolute hidden md:block md:left-1/2 md:transform md:-translate-x-1/2 px-4 py-2 rounded-full transition-all duration-300 ${
+        className={`absolute hidden md:block md:left-1/2 md:transform md:-translate-x-1/2 px-4 py-2 rounded-full transition-all duration-300 pointer-events-auto ${
           scrolled ? 'bg-[#F8C46F] border border-transparent' : 'bg-white/50 border border-transparent'
         }`}
         initial={{ opacity: 0 }}
@@ -289,7 +289,7 @@ export default function StickyHeader() {
       </motion.div>
       
       {/* MenuButton hamburger */}
-      <div className="absolute right-6 md:hidden z-[70] cursor-pointer">
+      <div className="absolute right-6 md:hidden z-[70] cursor-pointer pointer-events-auto">
         <MenuButton
           isOpen={mobileNavOpen}
           onClick={() => setMobileNavOpen(!mobileNavOpen)}
