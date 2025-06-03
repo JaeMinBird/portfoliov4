@@ -42,19 +42,19 @@ export const experiences: Experience[] = [
   {
     id: '3',
     line: 'I',
-    company: 'Stanford AI Lab',
-    what: 'Research Assistant',
-    when: '2023-2024',
-    where: 'Stanford, CA',
-    description: 'Conducted research on computer vision and natural language processing. Published 2 papers in top-tier conferences (CVPR, ICLR) on multimodal learning architectures.'
+    company: 'Upstate Accounting & Tax',
+    what: 'Web Developer Intern',
+    when: 'May 2024 - Aug 2024',
+    where: 'Albany, NY',
+    description: 'Designed 5+ interactive UI/UX prototypes in Figma, developed mobile-optimized website with JavaScript and REST API integration, and built 10+ dynamic PHP modules with Docker containerization and CI/CD automation.'
   },
   {
     id: '4',
     line: 'I',
-    company: 'MIT CSAIL',
-    what: 'Undergraduate Researcher',
-    when: '2022-2023',
-    where: 'Cambridge, MA',
-    description: 'Developed novel algorithms for robotic perception and manipulation. Work contributed to a Nature Robotics publication on autonomous assembly systems.'
+    company: 'Mindburn Solutions',
+    what: 'Support Technician',
+    when: 'Jul 2021 - Aug 2023',
+    where: 'Harrisburg, PA',
+    description: 'Maintained MySQL databases with 600+ inventory records, assisted disaster recovery for 100,000+ customer records, and deployed secure server environments for 5+ business clients.'
   }
 ];

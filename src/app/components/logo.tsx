@@ -16,7 +16,6 @@ export default function Logo() {
   const isMobile = useRef(false)
   const mobileTime = useRef(0)
   const isVisible = useRef(true)
-  const clock = useRef(new THREE.Clock())
 
   // Memoized mouse handler to prevent recreation
   const handleMouseMove = useCallback((event: MouseEvent) => {

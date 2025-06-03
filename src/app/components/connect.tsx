@@ -7,7 +7,6 @@ interface ConnectProps {
   socialLinks?: {
     github?: string;
     linkedin?: string;
-    resume?: string;
     email?: string;
     [key: string]: string | undefined;
   };
@@ -17,7 +16,6 @@ const Connect: React.FC<ConnectProps> = ({
   socialLinks = {
     github: 'https://github.com',
     linkedin: 'https://linkedin.com',
-    resume: '/resume.pdf',
     email: 'mailto:your.email@example.com',
   }
 }) => {
@@ -75,13 +73,15 @@ const Connect: React.FC<ConnectProps> = ({
       }
     );
 
-    if (eyesContainerRef.current) {
-      observer.observe(eyesContainerRef.current);
+    // Copy ref value to variable to fix the warning
+    const currentRef = eyesContainerRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (eyesContainerRef.current) {
-        observer.unobserve(eyesContainerRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -130,7 +130,6 @@ const Connect: React.FC<ConnectProps> = ({
   const socialPlatforms = [
     { name: 'GITHUB', href: socialLinks.github },
     { name: 'LINKEDIN', href: socialLinks.linkedin },
-    { name: 'RESUME', href: socialLinks.resume },
     { name: 'EMAIL', href: socialLinks.email }
   ];
 
@@ -204,15 +203,6 @@ const Connect: React.FC<ConnectProps> = ({
           <div className="flex flex-col items-center justify-center">
             <div className="text-8xl lg:text-9xl font-extrabold leading-tight" style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)', lineHeight: '0.85' }}>
               <motion.a
-                href={socialLinks.resume}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block cursor-pointer hover:text-opacity-80 transition-colors"
-                style={{ color: '#ff6b6b' }}
-              >
-                RESUME
-              </motion.a>
-              <motion.a
                 href={socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -241,7 +231,7 @@ const Connect: React.FC<ConnectProps> = ({
               </motion.a>
             </div>
           </div>
-          
+
           {/* Eyes positioned over the text */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="flex items-center justify-center gap-8">
