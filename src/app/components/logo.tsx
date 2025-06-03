@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useCallback } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
@@ -12,13 +12,66 @@ export default function Logo() {
   const pivotRef = useRef<THREE.Group | null>(null)
   const frameId = useRef<number | null>(null)
   const mousePosition = useRef({ x: 0, y: 0 })
+  const targetRotation = useRef({ x: 0, y: 0 })
   const isMobile = useRef(false)
   const mobileTime = useRef(0)
+  const isVisible = useRef(true)
+  const clock = useRef(new THREE.Clock())
+
+  // Memoized mouse handler to prevent recreation
+  const handleMouseMove = useCallback((event: MouseEvent) => {
+    if (isMobile.current) return
+    
+    const rect = mountRef.current?.getBoundingClientRect()
+    if (!rect) return
+
+    const x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+    const y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+    mousePosition.current = { x, y }
+    
+    // Pre-calculate target rotation
+    targetRotation.current.y = x * 1
+    targetRotation.current.x = -y * 0.4
+  }, [])
+
+  // Memoized resize handler
+  const handleResize = useCallback(() => {
+    if (cameraRef.current && rendererRef.current && mountRef.current) {
+      const newIsMobile = window.innerWidth <= 768
+      
+      // Only update if mobile state changed to prevent unnecessary work
+      if (isMobile.current !== newIsMobile) {
+        isMobile.current = newIsMobile
+      }
+      
+      const width = mountRef.current.clientWidth
+      const height = mountRef.current.clientHeight
+      
+      cameraRef.current.aspect = width / height
+      cameraRef.current.updateProjectionMatrix()
+      rendererRef.current.setSize(width, height)
+    }
+  }, [])
+
+  // Intersection Observer for performance
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible.current = entry.isIntersecting
+      },
+      { threshold: 0.1 }
+    )
+
+    if (mountRef.current) {
+      observer.observe(mountRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     if (!mountRef.current) return
 
-    // Detect mobile device
     isMobile.current = window.innerWidth <= 768
 
     const scene = new THREE.Scene()
@@ -34,18 +87,39 @@ export default function Logo() {
     camera.lookAt(0, 0, 0)
     cameraRef.current = camera
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    // Mobile-optimized renderer settings
+    const renderer = new THREE.WebGLRenderer({ 
+      antialias: !isMobile.current, // Disable antialiasing on mobile
+      alpha: true,
+      powerPreference: isMobile.current ? "default" : "high-performance",
+      stencil: false,
+      depth: false,
+      preserveDrawingBuffer: false,
+      failIfMajorPerformanceCaveat: true
+    })
+    
+    // Aggressive pixel ratio optimization for mobile
+    const pixelRatio = isMobile.current ? 1 : Math.min(window.devicePixelRatio, 2)
+    renderer.setPixelRatio(pixelRatio)
+    
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight)
     renderer.setClearColor(0x000000, 0)
+    
+    // Disable shadows and advanced features for mobile
+    renderer.shadowMap.enabled = false
     rendererRef.current = renderer
     mountRef.current.appendChild(renderer.domElement)
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+    // Minimal lighting for mobile performance
+    const ambientLight = new THREE.AmbientLight(0xffffff, isMobile.current ? 0.8 : 0.6)
     scene.add(ambientLight)
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1)
-    directionalLight.position.set(1, 1, 2)
-    scene.add(directionalLight)
+    // Skip directional light on mobile
+    if (!isMobile.current) {
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8)
+      directionalLight.position.set(1, 1, 2)
+      scene.add(directionalLight)
+    }
 
     const loader = new GLTFLoader()
     loader.load(
@@ -53,14 +127,27 @@ export default function Logo() {
       (gltf) => {
         const model = gltf.scene
 
+        // Ultra-optimized material for mobile
+        const material = new THREE.MeshBasicMaterial({
+          color: 0xF8C46F,
+          wireframe: true,
+          transparent: false, // Disable transparency on mobile for performance
+          opacity: 1,
+        })
+
+        // If mobile, use even simpler material
+        if (isMobile.current) {
+          material.transparent = false
+          material.opacity = 1
+        }
+
         model.traverse((child) => {
           if (child instanceof THREE.Mesh) {
-            child.material = new THREE.MeshBasicMaterial({
-              color: 0xF8C46F,
-              wireframe: true,
-              transparent: true,
-              opacity: 0.9,
-            })
+            child.material = material
+            child.frustumCulled = false
+            // Disable casting/receiving shadows
+            child.castShadow = false
+            child.receiveShadow = false
           }
         })
 
@@ -73,7 +160,6 @@ export default function Logo() {
         const scale = 4 / maxDim
         model.scale.setScalar(scale)
 
-        // Create pivot and add model
         const pivot = new THREE.Group()
         pivot.add(model)
         scene.add(pivot)
@@ -83,41 +169,36 @@ export default function Logo() {
       (error) => console.error('Model load error:', error)
     )
 
-    const handleMouseMove = (event: MouseEvent) => {
-      if (isMobile.current) return // Disable mouse interaction on mobile
-      
-      const rect = mountRef.current?.getBoundingClientRect()
-      if (!rect) return
+    let lastTime = 0
+    // Reduce FPS target for mobile
+    const targetFPS = isMobile.current ? 30 : 60
+    const frameInterval = 1000 / targetFPS
 
-      const x = ((event.clientX - rect.left) / rect.width) * 2 - 1
-      const y = -((event.clientY - rect.top) / rect.height) * 2 + 1
-      mousePosition.current = { x, y }
-    }
-
-    const animate = () => {
+    const animate = (currentTime: number) => {
       frameId.current = requestAnimationFrame(animate)
+
+      // Skip rendering if not visible for performance
+      if (!isVisible.current) return
+
+      // Throttle to target FPS
+      if (currentTime - lastTime < frameInterval) return
+      lastTime = currentTime
 
       if (pivotRef.current) {
         if (isMobile.current) {
-          // Mobile: Smooth automatic rotation
-          mobileTime.current += 0.005
+          // Simplified mobile animation - no delta time calculations
+          mobileTime.current += 0.016 // Fixed timestep for consistency
           
-          // Reduced left/right rotation with pauses at extremes
-          const rotationProgress = Math.sin(mobileTime.current * 0.5)
-          const smoothRotation = Math.sin(rotationProgress * Math.PI * 0.5)
-          
-          pivotRef.current.rotation.y = smoothRotation * 0.3 // Reduced from 0.8 to 0.3
-          
-          // More dramatic up/down movement
-          const verticalOffset = Math.sin(mobileTime.current * 0.4) * 0.4 // Increased from 0.1 to 0.4
-          pivotRef.current.rotation.x = verticalOffset
+          // Much simpler rotation calculation
+          const time = mobileTime.current * 0.8
+          pivotRef.current.rotation.y = Math.sin(time) * 0.3
+          pivotRef.current.rotation.x = Math.cos(time * 0.7) * 0.2
         } else {
-          // Desktop: Mouse-controlled rotation
-          const targetY = mousePosition.current.x * 1
-          const targetX = -mousePosition.current.y * 0.4
-
-          pivotRef.current.rotation.y += (targetY - pivotRef.current.rotation.y) * 0.05
-          pivotRef.current.rotation.x += (targetX - pivotRef.current.rotation.x) * 0.05
+          // Desktop interpolation
+          const lerpFactor = 0.08
+          
+          pivotRef.current.rotation.y += (targetRotation.current.y - pivotRef.current.rotation.y) * lerpFactor
+          pivotRef.current.rotation.x += (targetRotation.current.x - pivotRef.current.rotation.x) * lerpFactor
         }
       }
 
@@ -126,31 +207,39 @@ export default function Logo() {
       }
     }
 
-    const handleResize = () => {
-      if (cameraRef.current && rendererRef.current && mountRef.current) {
-        // Update mobile detection on resize
-        isMobile.current = window.innerWidth <= 768
-        
-        cameraRef.current.aspect = mountRef.current.clientWidth / mountRef.current.clientHeight
-        cameraRef.current.updateProjectionMatrix()
-        rendererRef.current.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight)
-      }
+    // Use passive listeners for better performance
+    if (!isMobile.current) {
+      mountRef.current.addEventListener('mousemove', handleMouseMove, { passive: true })
     }
-
-    mountRef.current.addEventListener('mousemove', handleMouseMove)
-    window.addEventListener('resize', handleResize)
-    animate()
+    window.addEventListener('resize', handleResize, { passive: true })
+    animate(0)
 
     return () => {
       if (frameId.current) cancelAnimationFrame(frameId.current)
-      mountRef.current?.removeEventListener('mousemove', handleMouseMove)
+      if (mountRef.current && !isMobile.current) {
+        mountRef.current.removeEventListener('mousemove', handleMouseMove)
+      }
       window.removeEventListener('resize', handleResize)
       if (mountRef.current && rendererRef.current?.domElement) {
         mountRef.current.removeChild(rendererRef.current.domElement)
       }
       rendererRef.current?.dispose()
+      
+      // Clean up materials and geometries
+      if (sceneRef.current) {
+        sceneRef.current.traverse((object) => {
+          if (object instanceof THREE.Mesh) {
+            object.geometry?.dispose()
+            if (Array.isArray(object.material)) {
+              object.material.forEach(material => material.dispose())
+            } else {
+              object.material?.dispose()
+            }
+          }
+        })
+      }
     }
-  }, [])
+  }, [handleMouseMove, handleResize])
 
   return (
     <div 

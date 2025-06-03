@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -68,7 +68,7 @@ const MenuButton = ({
       translateY: -2
     }
   };
-  
+
   const combinedLineProps = {
     stroke: color,
     strokeWidth: strokeWidth as number,
@@ -78,7 +78,7 @@ const MenuButton = ({
     transition,
     ...lineProps
   };
-  
+
   const unitHeight = 4;
   const unitWidth = (unitHeight * (width as number)) / (height as number);
 
@@ -124,7 +124,7 @@ export default function StickyHeader() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const previousIsMobileRef = useRef(false);
-  
+
   // Check if page is scrolled to control header appearance
   useEffect(() => {
     const handleScroll = () => {
@@ -135,28 +135,28 @@ export default function StickyHeader() {
         setScrolled(false);
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   // Handle mobile detection and menu state
   useEffect(() => {
     const checkMobile = () => {
       const isMobileView = window.innerWidth < 768;
-      
+
       // If switching from mobile to desktop and menu is open, close it
       if (!isMobileView && previousIsMobileRef.current && mobileNavOpen) {
         setMobileNavOpen(false);
       }
-      
+
       previousIsMobileRef.current = isMobileView;
       setIsMobile(isMobileView);
     };
-    
+
     // Initial check
     checkMobile();
-    
+
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, [mobileNavOpen]);
@@ -175,42 +175,42 @@ export default function StickyHeader() {
 
   const scrollToSection = (id: string, e?: React.MouseEvent) => {
     if (e) e.preventDefault();
-    
+
     // Close mobile nav if open
     setMobileNavOpen(false);
-    
+
     // Check if we're on a different page than home
     if (!document.getElementById(id)) {
       // Navigate to homepage with anchor
       window.location.href = `/#${id}`;
       return;
     }
-    
+
     // Get the target element's position
     const section = document.getElementById(id);
     if (section) {
       const elementPosition = section.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - 100;
-      
+
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
     }
   };
-  
+
   return (
-    <header className="fixed top-0 inset-x-0 z-50 h-20 flex items-center font-fredoka pointer-events-none" style={{ fontFamily: 'var(--font-fredoka)' }}>
-      
+    <header className="fixed top-0 inset-x-0 z-50 h-20 flex items-center font-fredoka" style={{ fontFamily: 'var(--font-fredoka)' }}>
+
       {/* Logo positioned on the left side of the screen */}
       <motion.div 
-        className="absolute left-6 md:left-12 z-[70] pointer-events-auto" // Added pointer-events-auto
+        className="absolute left-6 md:left-12 z-[70]" // Increased left padding on desktop
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
         <motion.div
-          className={`${isMobile ? 'w-[29px] h-[29px]' : 'w-[29px] h-[29px]'} cursor-pointer`}
+          className={`${isMobile ? 'w-[29px] h-[29px]' : 'w-[29px] h-[29px]'} cursor-pointer`} // All logos 29px (30% larger)
           whileHover={!isMobile ? { rotate: 218 } : undefined}
           animate={mobileNavOpen ? { rotate: 218 } : { rotate: 0 }}
           transition={{ duration: 0.5 }}
@@ -230,10 +230,10 @@ export default function StickyHeader() {
           />
         </motion.div>
       </motion.div>
-      
+
       {/* Desktop Navigation Container */}
       <motion.div 
-        className={`absolute hidden md:block md:left-1/2 md:transform md:-translate-x-1/2 px-4 py-2 rounded-full transition-all duration-300 pointer-events-auto ${
+        className={`absolute hidden md:block md:left-1/2 md:transform md:-translate-x-1/2 px-4 py-2 rounded-full transition-all duration-300 ${
           scrolled ? 'bg-[#F8C46F] border border-transparent' : 'bg-white/50 border border-transparent'
         }`}
         initial={{ opacity: 0 }}
@@ -255,7 +255,7 @@ export default function StickyHeader() {
               <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>EXPERIENCE</span>
             </motion.a>
           </div>
-          
+
           {/* Projects Link with slide effect - exact height of text */}
           <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
             <motion.a 
@@ -270,7 +270,7 @@ export default function StickyHeader() {
               <span className={scrolled ? 'text-white' : 'text-[#F8C46F]'}>PROJECTS</span>
             </motion.a>
           </div>
-          
+
           {/* Connect Link with slide effect - exact height of text */}
           <div className="overflow-hidden leading-none" style={{ height: '1.25rem' }}>
             <motion.a 
@@ -287,9 +287,9 @@ export default function StickyHeader() {
           </div>
         </nav>
       </motion.div>
-      
+
       {/* MenuButton hamburger */}
-      <div className="absolute right-6 md:hidden z-[70] cursor-pointer pointer-events-auto">
+      <div className="absolute right-6 md:hidden z-[70] cursor-pointer">
         <MenuButton
           isOpen={mobileNavOpen}
           onClick={() => setMobileNavOpen(!mobileNavOpen)}
@@ -301,12 +301,12 @@ export default function StickyHeader() {
           height="24"
         />
       </div>
-      
+
       {/* Mobile Navigation Overlay */}
       <AnimatePresence>
         {mobileNavOpen && (
           <motion.div
-            className="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-start"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -358,7 +358,7 @@ export default function StickyHeader() {
                 RESUME
               </motion.a>
             </nav>
-            
+
             {/* Footer section for mobile menu similar to screenshot */}
             <motion.div 
               className="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-8 text-center text-sm text-gray-600"
@@ -375,11 +375,11 @@ export default function StickyHeader() {
                   <IconBrandGithubFilled size={24} />
                 </a>
               </div>
-              
+
               <div className="mb-4">
                 <a href="mailto:hello@toyfight.co" className="hover:text-[#F8C46F]">hello@toyfight.co</a>
               </div>
-              
+
               <p className="text-xs">© 2025 ToyFight® All Rights Reserved</p>
             </motion.div>
           </motion.div>
