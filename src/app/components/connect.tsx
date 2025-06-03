@@ -5,20 +5,26 @@ import { motion } from 'framer-motion';
 
 interface ConnectProps {
   socialLinks?: {
-    instagram?: string;
+    github?: string;
     linkedin?: string;
+    resume?: string;
+    email?: string;
     [key: string]: string | undefined;
   };
 }
 
 const Connect: React.FC<ConnectProps> = ({ 
   socialLinks = {
-    instagram: 'https://instagram.com',
+    github: 'https://github.com',
     linkedin: 'https://linkedin.com',
+    resume: '/resume.pdf',
+    email: 'mailto:your.email@example.com',
   }
 }) => {
   const eyesContainerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
+  const [isInView, setIsInView] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   
   useEffect(() => {
@@ -43,6 +49,40 @@ const Connect: React.FC<ConnectProps> = ({
     
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of component is visible
+        rootMargin: '50px' // Start a bit before the component enters view
+      }
+    );
+
+    if (eyesContainerRef.current) {
+      observer.observe(eyesContainerRef.current);
+    }
+
+    return () => {
+      if (eyesContainerRef.current) {
+        observer.unobserve(eyesContainerRef.current);
+      }
     };
   }, []);
   
@@ -72,13 +112,29 @@ const Connect: React.FC<ConnectProps> = ({
     };
   };
 
+  const calculateParallaxPosition = () => {
+    if (isMobile || !isInView) return { x: 0, y: 0 };
+    
+    // Create more balanced movement with stronger upward motion
+    const baseMovement = scrollY * 0.1;
+    
+    return {
+      x: 0, // No horizontal movement
+      y: baseMovement > 0 ? -baseMovement * 1 : baseMovement * 2  // More upward movement, less downward
+    };
+  };
+
   const leftEyeRef = useRef<HTMLDivElement>(null);
   const rightEyeRef = useRef<HTMLDivElement>(null);
 
   const socialPlatforms = [
-    { name: 'INSTAGRAM', href: socialLinks.instagram },
-    { name: 'LINKEDIN', href: socialLinks.linkedin }
+    { name: 'GITHUB', href: socialLinks.github },
+    { name: 'LINKEDIN', href: socialLinks.linkedin },
+    { name: 'RESUME', href: socialLinks.resume },
+    { name: 'EMAIL', href: socialLinks.email }
   ];
+
+  const parallaxPosition = calculateParallaxPosition();
   
   return (
     <div 
@@ -123,7 +179,9 @@ const Connect: React.FC<ConnectProps> = ({
                 />
               </div>
             </div>
-          </div>          {/* Stacked text list - no hover effects on mobile */}
+          </div>
+
+          {/* Stacked text list - no hover effects on mobile */}
           <div className="flex flex-col items-center space-y-6">
             {socialPlatforms.map((platform) => (
               <a
@@ -142,88 +200,110 @@ const Connect: React.FC<ConnectProps> = ({
       ) : (
         // Desktop Layout (xl and above)
         <>
-          {/* Top Text with rollup hover animation */}
-          <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="overflow-hidden leading-none" style={{ height: '9rem' }}> {/* Increased height for better animation */}
+          {/* Centered text with tight spacing */}
+          <div className="flex flex-col items-center justify-center">
+            <div className="text-8xl lg:text-9xl font-extrabold leading-tight" style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)', lineHeight: '0.85' }}>
               <motion.a
-                href={socialLinks.instagram}
+                href={socialLinks.resume}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-8xl lg:text-9xl font-extrabold leading-none cursor-pointer flex flex-col"
-                style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)' }}
-                initial={{ y: '1rem' }} // Start position slightly down
-                whileHover={{ y: '-8rem' }} // Increased travel distance
-                transition={{ duration: 0.2 }}
+                className="block cursor-pointer hover:text-opacity-80 transition-colors"
+                style={{ color: '#ff6b6b' }}
               >
-                <span style={{ color: '#ff6b6b' }}>INSTAGRAM</span>
-                <span style={{ color: '#ff6b6b' }}>INSTAGRAM</span>
+                RESUME
               </motion.a>
-            </div>
-          </div>
-          
-          {/* Bottom Text with rollup hover animation */}
-          <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 translate-y-1/2">
-            <div className="overflow-hidden leading-none" style={{ height: '9rem' }}> {/* Increased height for better animation */}
               <motion.a
                 href={socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-8xl lg:text-9xl font-extrabold leading-none cursor-pointer flex flex-col"
-                style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)' }}
-                initial={{ y: '1rem' }} // Start position slightly down
-                whileHover={{ y: '-8rem' }} // Increased travel distance
-                transition={{ duration: 0.2 }}
+                className="block cursor-pointer hover:text-opacity-80 transition-colors"
+                style={{ color: '#ff6b6b' }}
               >
-                <span style={{ color: '#ff6b6b' }}>LINKEDIN</span>
-                <span style={{ color: '#ff6b6b' }}>LINKEDIN</span>
+                LINKEDIN
+              </motion.a>
+              <motion.a
+                href={socialLinks.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block cursor-pointer hover:text-opacity-80 transition-colors"
+                style={{ color: '#ff6b6b' }}
+              >
+                GITHUB
+              </motion.a>
+              <motion.a
+                href={socialLinks.email}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block cursor-pointer hover:text-opacity-80 transition-colors"
+                style={{ color: '#ff6b6b' }}
+              >
+                EMAIL
               </motion.a>
             </div>
           </div>
           
-          {/* Eyes Container */}
-          <div className="flex items-center justify-center gap-8">
-            {/* Left Eye */}
-            <div 
-              ref={leftEyeRef}
-              className="w-32 h-32 rounded-full flex items-center justify-center relative"
-              style={{ backgroundColor: '#3B3B3B' }}
-            >
-              <div 
-                className="w-24 h-24 bg-white rounded-full absolute flex items-center justify-center"
-                style={{
-                  transform: `translate(${calculateEyePosition(leftEyeRef.current, 4).x}px, ${calculateEyePosition(leftEyeRef.current, 4).y}px)`,
+          {/* Eyes positioned over the text */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="flex items-center justify-center gap-8">
+              {/* Left Eye */}
+              <motion.div 
+                ref={leftEyeRef}
+                className="w-32 h-32 rounded-full flex items-center justify-center relative"
+                style={{ backgroundColor: '#3B3B3B' }}
+                animate={{
+                  y: parallaxPosition.y * 0.8
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 25
                 }}
               >
                 <div 
-                  className="w-12 h-12 rounded-full absolute"
+                  className="w-24 h-24 bg-white rounded-full absolute flex items-center justify-center"
                   style={{
-                    backgroundColor: '#3B3B3B',
-                    transform: `translate(${calculateEyePosition(leftEyeRef.current, 20).x}px, ${calculateEyePosition(leftEyeRef.current, 20).y}px)`,
+                    transform: `translate(${calculateEyePosition(leftEyeRef.current, 4).x}px, ${calculateEyePosition(leftEyeRef.current, 4).y}px)`,
                   }}
-                />
-              </div>
-            </div>
-            
-            {/* Right Eye */}
-            <div 
-              ref={rightEyeRef}
-              className="w-32 h-32 rounded-full flex items-center justify-center relative"
-              style={{ backgroundColor: '#3B3B3B' }}
-            >
-              <div 
-                className="w-24 h-24 bg-white rounded-full absolute flex items-center justify-center"
-                style={{
-                  transform: `translate(${calculateEyePosition(rightEyeRef.current, 4).x}px, ${calculateEyePosition(rightEyeRef.current, 4).y}px)`,
+                >
+                  <div 
+                    className="w-12 h-12 rounded-full absolute"
+                    style={{
+                      backgroundColor: '#3B3B3B',
+                      transform: `translate(${calculateEyePosition(leftEyeRef.current, 20).x}px, ${calculateEyePosition(leftEyeRef.current, 20).y}px)`,
+                    }}
+                  />
+                </div>
+              </motion.div>
+              
+              {/* Right Eye */}
+              <motion.div 
+                ref={rightEyeRef}
+                className="w-32 h-32 rounded-full flex items-center justify-center relative"
+                style={{ backgroundColor: '#3B3B3B' }}
+                animate={{
+                  y: parallaxPosition.y * 0.8
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 25
                 }}
               >
                 <div 
-                  className="w-12 h-12 rounded-full absolute"
+                  className="w-24 h-24 bg-white rounded-full absolute flex items-center justify-center"
                   style={{
-                    backgroundColor: '#3B3B3B',
-                    transform: `translate(${calculateEyePosition(rightEyeRef.current, 20).x}px, ${calculateEyePosition(rightEyeRef.current, 20).y}px)`,
+                    transform: `translate(${calculateEyePosition(rightEyeRef.current, 4).x}px, ${calculateEyePosition(rightEyeRef.current, 4).y}px)`,
                   }}
-                />
-              </div>
+                >
+                  <div 
+                    className="w-12 h-12 rounded-full absolute"
+                    style={{
+                      backgroundColor: '#3B3B3B',
+                      transform: `translate(${calculateEyePosition(rightEyeRef.current, 20).x}px, ${calculateEyePosition(rightEyeRef.current, 20).y}px)`,
+                    }}
+                  />
+                </div>
+              </motion.div>
             </div>
           </div>
         </>
