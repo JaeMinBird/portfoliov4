@@ -15,6 +15,9 @@ export default function Home() {
           <div>
             <Logo />
           </div>
+          <div className="mt-10 md:mt-6">
+            <Metro />
+          </div>
         </section>
         
         <section id="experience" className="mb-24">
