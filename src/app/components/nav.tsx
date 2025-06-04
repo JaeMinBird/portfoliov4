@@ -234,7 +234,7 @@ export default function StickyHeader() {
       {/* Desktop Navigation Container */}
       <motion.div 
         className={`absolute hidden md:block md:left-1/2 md:transform md:-translate-x-1/2 px-4 py-2 rounded-full transition-all duration-300 ${
-          scrolled ? 'bg-[#F8C46F] border border-transparent' : 'bg-white/50 border border-transparent'
+          scrolled ? 'bg-[#F8C46F] border border-transparent' : 'bg-white border border-transparent'
         }`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
