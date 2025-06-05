@@ -17,20 +17,41 @@ export default function Logo() {
   const mobileTime = useRef(0)
   const isVisible = useRef(true)
 
-  // Memoized mouse handler to prevent recreation
+  // Memoized mouse handler with distance-based optimization
   const handleMouseMove = useCallback((event: MouseEvent) => {
-    if (isMobile.current) return
+    if (isMobile.current || !mountRef.current) return
     
-    const rect = mountRef.current?.getBoundingClientRect()
-    if (!rect) return
-
-    const x = ((event.clientX - rect.left) / rect.width) * 2 - 1
-    const y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+    const rect = mountRef.current.getBoundingClientRect()
+    
+    // Calculate distance from logo center
+    const centerX = rect.left + rect.width / 2
+    const centerY = rect.top + rect.height / 2
+    const mouseX = event.clientX
+    const mouseY = event.clientY
+    
+    // Define interaction radius (e.g., 1.5x the logo size)
+    const interactionRadius = Math.max(rect.width, rect.height) * 1.5
+    const distance = Math.sqrt(
+      Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2)
+    )
+    
+    // Only update if mouse is within interaction radius
+    if (distance > interactionRadius) {
+      // Gradually return to neutral position when outside radius
+      targetRotation.current.y *= 0.95
+      targetRotation.current.x *= 0.95
+      return
+    }
+    
+    // Calculate normalized coordinates relative to logo bounds
+    const x = ((mouseX - rect.left) / rect.width) * 2 - 1
+    const y = -((mouseY - rect.top) / rect.height) * 2 + 1
     mousePosition.current = { x, y }
     
-    // Pre-calculate target rotation
-    targetRotation.current.y = x * 1
-    targetRotation.current.x = -y * 0.4
+    // Apply distance-based dampening for smoother interaction
+    const dampening = 1 - (distance / interactionRadius)
+    targetRotation.current.y = x * dampening * 1
+    targetRotation.current.x = -y * dampening * 0.4
   }, [])
 
   // Memoized resize handler
@@ -206,17 +227,17 @@ export default function Logo() {
       }
     }
 
-    // Use passive listeners for better performance
+    // Use document listener but with distance checking for optimization
     if (!isMobile.current) {
-      mountRef.current.addEventListener('mousemove', handleMouseMove, { passive: true })
+      document.addEventListener('mousemove', handleMouseMove, { passive: true })
     }
     window.addEventListener('resize', handleResize, { passive: true })
     animate(0)
 
     return () => {
       if (frameId.current) cancelAnimationFrame(frameId.current)
-      if (mountRef.current && !isMobile.current) {
-        mountRef.current.removeEventListener('mousemove', handleMouseMove)
+      if (!isMobile.current) {
+        document.removeEventListener('mousemove', handleMouseMove)
       }
       window.removeEventListener('resize', handleResize)
       if (mountRef.current && rendererRef.current?.domElement) {
