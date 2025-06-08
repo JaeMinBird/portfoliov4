@@ -20,10 +20,10 @@ export default function Footer({ className = '' }: FooterProps) {
         {/* Call to action */}
         <div className="w-full mb-8 md:mb-12">
           <h3 className="text-3xl sm:text-4xl md:text-5xl font-fredoka text-white leading-none mb-2">
-            Let's create something
+            doing the best
           </h3>
           <h3 className="text-3xl sm:text-4xl md:text-5xl font-fredoka text-white leading-none">
-            amazing together
+            i can
           </h3>
         </div>
 

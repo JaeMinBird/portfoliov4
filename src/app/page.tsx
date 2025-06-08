@@ -4,6 +4,8 @@ import Projects from './components/projects';
 import Connect from './components/connect';
 import Metro from './components/metro';
 import Logo from './components/logo';
+import Footer from './components/footer';
+import About from './components/about';
 
 export default function Home() {
   return (
@@ -16,7 +18,7 @@ export default function Home() {
             <Logo />
           </div>
           <div className="mt-10 md:mt-6">
-            <Metro />
+            <About />
           </div>
         </section>
         
@@ -33,12 +35,12 @@ export default function Home() {
           <div className="mt-10 md:mt-16">
             <Header id={2} total={3} title="projects" color="#5a9bd5" />
           </div>
-          <div className="mt-6">
+          <div className="mt-10 md:mt-6 px-4">
             <Projects />
           </div>
         </section>
         
-        <section id="connect" className="mb-24">
+        <section id="connect">
           <div className="mt-10 md:mt-16">
             <Header id={3} total={3} title="connect" color="#ff6b6b" />
           </div>
@@ -46,6 +48,9 @@ export default function Home() {
             <Connect />
           </div>
         </section>
+      </div>
+      <div className="container mx-auto px-4">
+        <Footer className="mt-16 md:mt-24" />
       </div>
     </div>
   );

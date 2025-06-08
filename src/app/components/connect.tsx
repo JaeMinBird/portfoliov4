@@ -201,34 +201,52 @@ const Connect: React.FC<ConnectProps> = ({
         <>
           {/* Centered text with tight spacing */}
           <div className="flex flex-col items-center justify-center">
-            <div className="text-8xl lg:text-9xl font-extrabold leading-tight" style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)', lineHeight: '0.85' }}>
-              <motion.a
-                href={socialLinks.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block cursor-pointer hover:text-opacity-80 transition-colors"
-                style={{ color: '#ff6b6b' }}
-              >
-                LINKEDIN
-              </motion.a>
-              <motion.a
-                href={socialLinks.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block cursor-pointer hover:text-opacity-80 transition-colors"
-                style={{ color: '#ff6b6b' }}
-              >
-                GITHUB
-              </motion.a>
-              <motion.a
-                href={socialLinks.email}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block cursor-pointer hover:text-opacity-80 transition-colors"
-                style={{ color: '#ff6b6b' }}
-              >
-                EMAIL
-              </motion.a>
+            <div className="text-8xl lg:text-9xl font-extrabold" style={{ color: '#3B3B3B', fontFamily: 'var(--font-fredoka)', lineHeight: '1' }}>
+              {/* LinkedIn Link with slide effect */}
+              <div className="overflow-hidden leading-none" style={{ height: '1em' }}>
+                <motion.a
+                  href={socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block cursor-pointer flex flex-col leading-none"
+                  style={{ color: '#ff6b6b' }}
+                  whileHover={{ y: '-1em' }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <span>LINKEDIN</span>
+                  <span>LINKEDIN</span>
+                </motion.a>
+              </div>
+              {/* GitHub Link with slide effect */}
+              <div className="overflow-hidden leading-none" style={{ height: '1em' }}>
+                <motion.a
+                  href={socialLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block cursor-pointer flex flex-col leading-none"
+                  style={{ color: '#ff6b6b' }}
+                  whileHover={{ y: '-1em' }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <span>GITHUB</span>
+                  <span>GITHUB</span>
+                </motion.a>
+              </div>
+              {/* Email Link with slide effect */}
+              <div className="overflow-hidden leading-none" style={{ height: '1em' }}>
+                <motion.a
+                  href={socialLinks.email}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block cursor-pointer flex flex-col leading-none"
+                  style={{ color: '#ff6b6b' }}
+                  whileHover={{ y: '-1em' }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <span>EMAIL</span>
+                  <span>EMAIL</span>
+                </motion.a>
+              </div>
             </div>
           </div>
 
