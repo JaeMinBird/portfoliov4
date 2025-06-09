@@ -240,8 +240,11 @@ export default function Logo() {
         document.removeEventListener('mousemove', handleMouseMove)
       }
       window.removeEventListener('resize', handleResize)
-      if (mountRef.current && rendererRef.current?.domElement) {
-        mountRef.current.removeChild(rendererRef.current.domElement)
+      
+      // Fix: Store the current reference before cleanup
+      const currentMountRef = mountRef.current
+      if (currentMountRef && rendererRef.current?.domElement) {
+        currentMountRef.removeChild(rendererRef.current.domElement)
       }
       rendererRef.current?.dispose()
       

@@ -21,7 +21,7 @@ export default function About() {
         >
           <div className="space-y-4">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-fredoka font-bold text-[#3B3B3B] leading-tight">
-              Hey, I'm{' '}
+              Hey, I&apos;m{' '}
               <motion.span 
                 className="text-[#F8C46F]"
                 whileHover={{ scale: 1.05 }}
@@ -35,7 +35,7 @@ export default function About() {
               <span style={{ color: '#FF6B6B' }}>Computer Assisted Driving</span> at the HTI Lab 
               and working on <span style={{ color: '#5A9BD5' }}>Augmented Reality</span> at{' '}
               <span style={{ color: '#6ABF6F' }}>JiaYou Tennis</span>.
-              Outside of work I'm either{' '}
+              Outside of work I&apos;m either{' '}
               <span 
                 className="relative cursor-pointer"
                 style={{ color: '#F8C46F' }}
@@ -44,9 +44,9 @@ export default function About() {
               >
                 playing guitar
                 {hoveredGuitar && (
-                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black text-white text-sm px-2 py-1 rounded whitespace-nowrap z-50 pointer-events-none">
-                    Ibanez AS53
-                  </div>
+                  <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black text-white text-sm px-2 py-1 rounded whitespace-nowrap z-50 pointer-events-none block">
+                    Ibanez AS53 ( ◡̀_◡́)ᕤ
+                  </span>
                 )}
               </span>{' '}
               or{' '}
@@ -56,11 +56,11 @@ export default function About() {
                 onMouseEnter={() => setHoveredCar(true)}
                 onMouseLeave={() => setHoveredCar(false)}
               >
-                working on my car
+                wrenching on my car
                 {hoveredCar && (
-                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black text-white text-sm px-2 py-1 rounded whitespace-nowrap z-50 pointer-events-none">
-                    2017 WRX STI
-                  </div>
+                  <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black text-white text-sm px-2 py-1 rounded whitespace-nowrap z-50 pointer-events-none block">
+                    2017 WRX STI \(`v´)/
+                  </span>
                 )}
               </span>
             </p>
