@@ -37,6 +37,7 @@ export default function About() {
                 href="https://www.ime.psu.edu/research/facilities-and-labs/human-technology-interaction-lab.aspx" 
                 target="_blank" 
                 rel="noopener noreferrer" 
+                className="transition-opacity duration-300 ease-out hover:opacity-70"
                 style={{ color: '#1E407C' }}
               >
                 HTI Lab
@@ -46,6 +47,7 @@ export default function About() {
                 href="https://jiayoutennis.net" 
                 target="_blank" 
                 rel="noopener noreferrer" 
+                className="transition-opacity duration-300 ease-out hover:opacity-70"
                 style={{ color: '#6ABF6F' }}
               >
                 JiaYou Tennis
