@@ -32,9 +32,24 @@ export default function About() {
             </h2>
             <p className="text-lg md:text-xl text-gray-600 font-fredoka leading-relaxed">
               A <span style={{ color: '#1E407C' }}>Penn State</span> computer science student researching{' '}
-              <span style={{ color: '#FF6B6B' }}>Computer Assisted Driving</span> at the HTI Lab 
+              <span style={{ color: '#FF6B6B' }}>Computer Assisted Driving</span> at the{' '}
+              <a 
+                href="https://www.ime.psu.edu/research/facilities-and-labs/human-technology-interaction-lab.aspx" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={{ color: '#1E407C' }}
+              >
+                HTI Lab
+              </a>{' '}
               and working on <span style={{ color: '#5A9BD5' }}>Augmented Reality</span> at{' '}
-              <span style={{ color: '#6ABF6F' }}>JiaYou Tennis</span>.
+              <a 
+                href="https://jiayoutennis.net" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={{ color: '#6ABF6F' }}
+              >
+                JiaYou Tennis
+              </a>.
               Outside of work I&apos;m either{' '}
               <span 
                 className="relative cursor-pointer"

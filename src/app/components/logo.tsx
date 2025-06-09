@@ -103,7 +103,7 @@ export default function Logo() {
       0.1,
       1000
     )
-    camera.position.set(0, 0, 5)
+    camera.position.set(0, 0, 3.5) // Moved closer from 5 to 3.5
     camera.lookAt(0, 0, 0)
     cameraRef.current = camera
 
@@ -177,7 +177,7 @@ export default function Logo() {
         model.position.sub(center)
 
         const maxDim = Math.max(size.x, size.y, size.z)
-        const scale = 4 / maxDim
+        const scale = 3.5 / maxDim // Increased from 4 to 5.5 for larger model
         model.scale.setScalar(scale)
 
         const pivot = new THREE.Group()
@@ -267,7 +267,7 @@ export default function Logo() {
   return (
     <div 
       ref={mountRef} 
-      className="w-full h-96 md:h-[500px] rounded-2xl overflow-hidden"
+      className="w-full h-80 md:h-96 rounded-2xl overflow-hidden" // Reduced from h-96 md:h-[500px] to h-80 md:h-96
       style={{ pointerEvents: 'auto' }}
     />
   )
